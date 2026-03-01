@@ -14,7 +14,125 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      assessments: {
+        Row: {
+          band: string | null
+          category_adoption_roi: number | null
+          category_data_readiness: number | null
+          category_governance: number | null
+          category_workflow_execution: number | null
+          created_at: string
+          id: string
+          lead_id: string
+          q1: number | null
+          q10: number | null
+          q11: number | null
+          q12: number | null
+          q2: number | null
+          q3: number | null
+          q4: number | null
+          q5: number | null
+          q6: number | null
+          q7: number | null
+          q8: number | null
+          q9: number | null
+          recommendations: Json | null
+          total_score: number | null
+        }
+        Insert: {
+          band?: string | null
+          category_adoption_roi?: number | null
+          category_data_readiness?: number | null
+          category_governance?: number | null
+          category_workflow_execution?: number | null
+          created_at?: string
+          id?: string
+          lead_id: string
+          q1?: number | null
+          q10?: number | null
+          q11?: number | null
+          q12?: number | null
+          q2?: number | null
+          q3?: number | null
+          q4?: number | null
+          q5?: number | null
+          q6?: number | null
+          q7?: number | null
+          q8?: number | null
+          q9?: number | null
+          recommendations?: Json | null
+          total_score?: number | null
+        }
+        Update: {
+          band?: string | null
+          category_adoption_roi?: number | null
+          category_data_readiness?: number | null
+          category_governance?: number | null
+          category_workflow_execution?: number | null
+          created_at?: string
+          id?: string
+          lead_id?: string
+          q1?: number | null
+          q10?: number | null
+          q11?: number | null
+          q12?: number | null
+          q2?: number | null
+          q3?: number | null
+          q4?: number | null
+          q5?: number | null
+          q6?: number | null
+          q7?: number | null
+          q8?: number | null
+          q9?: number | null
+          recommendations?: Json | null
+          total_score?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assessments_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leads: {
+        Row: {
+          agent_count: string | null
+          brokerage_name: string | null
+          consent: boolean | null
+          created_at: string
+          email: string
+          first_name: string | null
+          id: string
+          last_name: string | null
+          top_priority: string | null
+        }
+        Insert: {
+          agent_count?: string | null
+          brokerage_name?: string | null
+          consent?: boolean | null
+          created_at?: string
+          email: string
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          top_priority?: string | null
+        }
+        Update: {
+          agent_count?: string | null
+          brokerage_name?: string | null
+          consent?: boolean | null
+          created_at?: string
+          email?: string
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          top_priority?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
