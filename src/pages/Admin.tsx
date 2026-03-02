@@ -101,17 +101,22 @@ export default function Admin() {
   };
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (session) {
         setAuthed(true);
         await checkAdminRole(session.user.id);
+      } else {
+        setAuthed(false);
+        setIsAdmin(null);
       }
+      setSessionChecked(true);
     });
     supabase.auth.getSession().then(async ({ data: { session } }) => {
       if (session) {
         setAuthed(true);
         await checkAdminRole(session.user.id);
       }
+      setSessionChecked(true);
     });
     return () => subscription.unsubscribe();
   }, []);
