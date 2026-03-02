@@ -289,6 +289,7 @@ export default function Admin() {
           </div>
         )}
 
+        <div className="border border-border rounded overflow-hidden">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
