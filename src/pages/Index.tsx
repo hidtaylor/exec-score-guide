@@ -71,19 +71,6 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Social Proof Placeholder */}
-      <section className="border-b border-border bg-muted/50">
-        <div className="container py-14 md:py-16 text-center">
-          <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-6">
-            Trusted by Forward-Thinking Brokerages
-          </p>
-          <div className="flex flex-wrap justify-center gap-10 items-center opacity-40">
-            {["Regional Brokerage Group", "National Realty Corp", "Premier Properties", "Alliance Real Estate"].map((name) => (
-              <span key={name} className="text-sm font-semibold text-foreground tracking-wide uppercase">{name}</span>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Credibility */}
       <section className="bg-primary text-primary-foreground">
