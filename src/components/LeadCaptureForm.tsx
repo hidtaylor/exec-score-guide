@@ -60,7 +60,7 @@ export default function LeadCaptureForm() {
       if (error) throw error;
 
       setLead({
-        id: data.id,
+        id: leadId,
         firstName: form.firstName,
         lastName: form.lastName,
         email: form.email,
