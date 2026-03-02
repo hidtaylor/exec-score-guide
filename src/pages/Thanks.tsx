@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 
-const CALENDLY_URL = "https://calendly.com/your-link";
+const CALENDLY_URL = "https://calendly.com/derek-taylor-2/t3-sixty-brokerage-ai-readiness-consultation";
 
 export default function Thanks() {
   return (
@@ -42,9 +42,9 @@ export default function Thanks() {
             Prefer email?
           </p>
           <Button variant="outline" asChild>
-            <a href="mailto:ai@yourbrokerage.com">
+            <a href="mailto:derek.taylor@t3sixty.com">
               <Mail className="h-4 w-4 mr-2" />
-              ai@yourbrokerage.com
+              derek.taylor@t3sixty.com
             </a>
           </Button>
         </div>
