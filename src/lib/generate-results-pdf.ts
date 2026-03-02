@@ -43,7 +43,7 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
     const logoDataUrl = await loadImageAsDataUrl(t360Logo);
     const logoH = 36;
     const logoW = 36;
-    doc.addImage(logoDataUrl, "WEBP", margin, y - logoH + 8, logoW, logoH);
+    doc.addImage(logoDataUrl, "JPEG", margin, y - logoH + 8, logoW, logoH);
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
     setColor(doc, 100, 105, 115);
