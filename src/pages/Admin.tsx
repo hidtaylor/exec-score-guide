@@ -39,19 +39,35 @@ interface LeadRow {
 
 export default function Admin() {
   const [authed, setAuthed] = useState(false);
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [leads, setLeads] = useState<LeadRow[]>([]);
   const [bandFilter, setBandFilter] = useState("all");
 
+  const checkAdminRole = async (userId: string) => {
+    const { data, error } = await supabase.rpc("has_role", {
+      _user_id: userId,
+      _role: "admin",
+    });
+    if (error) {
+      console.error("Role check failed:", error);
+      setIsAdmin(false);
+      return false;
+    }
+    setIsAdmin(!!data);
+    return !!data;
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) throw error;
       setAuthed(true);
+      await checkAdminRole(data.user.id);
     } catch (err: any) {
       toast.error(err.message || "Login failed");
     } finally {
@@ -60,18 +76,25 @@ export default function Admin() {
   };
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((_, session) => {
-      if (session) setAuthed(true);
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_, session) => {
+      if (session) {
+        setAuthed(true);
+        await checkAdminRole(session.user.id);
+      }
     });
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) setAuthed(true);
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (session) {
+        setAuthed(true);
+        await checkAdminRole(session.user.id);
+      }
     });
+    return () => subscription.unsubscribe();
   }, []);
 
   useEffect(() => {
-    if (!authed) return;
+    if (!authed || !isAdmin) return;
     fetchLeads();
-  }, [authed]);
+  }, [authed, isAdmin]);
 
   const fetchLeads = async () => {
     const { data, error } = await supabase
@@ -151,6 +174,30 @@ export default function Admin() {
               </Button>
             </form>
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (isAdmin === null) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="container py-24 text-center text-muted-foreground">Checking access…</div>
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="container max-w-sm py-24 text-center space-y-4">
+          <h1 className="text-display-sm text-foreground">Access Denied</h1>
+          <p className="text-sm text-muted-foreground">Your account does not have admin privileges.</p>
+          <Button variant="outline" onClick={() => { supabase.auth.signOut(); setAuthed(false); setIsAdmin(null); }}>
+            Sign Out
+          </Button>
         </div>
       </div>
     );
