@@ -42,10 +42,12 @@ export default function LeadCaptureForm() {
     }
 
     setLoading(true);
+    const leadId = crypto.randomUUID();
     try {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("leads")
         .insert({
+          id: leadId,
           first_name: form.firstName || null,
           last_name: form.lastName || null,
           email: form.email,
@@ -53,9 +55,7 @@ export default function LeadCaptureForm() {
           agent_count: form.agentCount || null,
           top_priority: form.topPriority || null,
           consent: form.consent,
-        })
-        .select("id")
-        .single();
+        });
 
       if (error) throw error;
 
