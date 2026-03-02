@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { HelpCircle } from "lucide-react";
 import Header from "@/components/Header";
 import { useAppContext } from "@/context/AppContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 import {
   QUESTIONS,
   CATEGORIES,
@@ -21,6 +23,7 @@ export default function Scorecard() {
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [currentCategory, setCurrentCategory] = useState(0);
   const [loading, setLoading] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (!lead) {
@@ -147,16 +150,29 @@ export default function Scorecard() {
               <div key={q.id} className="space-y-3 animate-fade-in">
                 <p className="text-foreground font-medium leading-relaxed flex items-start gap-1.5">
                   <span>{q.question}</span>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <button type="button" className="shrink-0 mt-0.5" aria-label="More info">
-                        <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
-                      </button>
-                    </TooltipTrigger>
-                    <TooltipContent side="top" className="max-w-xs text-sm">
-                      {q.tooltip}
-                    </TooltipContent>
-                  </Tooltip>
+                  {isMobile ? (
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <button type="button" className="shrink-0 mt-0.5" aria-label="More info">
+                          <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                        </button>
+                      </PopoverTrigger>
+                      <PopoverContent side="bottom" align="start" className="max-w-xs text-sm">
+                        {q.tooltip}
+                      </PopoverContent>
+                    </Popover>
+                  ) : (
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button type="button" className="shrink-0 mt-0.5" aria-label="More info">
+                          <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent side="top" className="max-w-xs text-sm">
+                        {q.tooltip}
+                      </TooltipContent>
+                    </Tooltip>
+                  )}
                 </p>
                 <div className="flex items-center justify-between text-xs text-muted-foreground mb-1">
                   <span>{q.labels[0]}</span>
