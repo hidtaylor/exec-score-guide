@@ -45,6 +45,10 @@ export default function Admin() {
   const [loading, setLoading] = useState(false);
   const [leads, setLeads] = useState<LeadRow[]>([]);
   const [bandFilter, setBandFilter] = useState("all");
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [changingPassword, setChangingPassword] = useState(false);
 
   const checkAdminRole = async (userId: string) => {
     const { data, error } = await supabase.rpc("has_role", {
