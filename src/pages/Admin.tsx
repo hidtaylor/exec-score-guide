@@ -116,7 +116,7 @@ export default function Admin() {
   const fetchLeads = async () => {
     const { data, error } = await supabase
       .from("leads")
-      .select("*, assessments(total_score, band)")
+      .select("*, assessments(total_score, band, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, category_data_readiness, category_workflow_execution, category_governance, category_adoption_roi)")
       .order("created_at", { ascending: false });
 
     if (error) {
