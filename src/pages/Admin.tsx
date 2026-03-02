@@ -19,8 +19,11 @@ import {
 } from "@/components/ui/table";
 import Header from "@/components/Header";
 import { supabase } from "@/integrations/supabase/client";
-import { Download, LogIn, KeyRound } from "lucide-react";
+import { Download, LogIn, KeyRound, FileDown } from "lucide-react";
 import { toast } from "sonner";
+import { generateResultsPDF } from "@/lib/generate-results-pdf";
+import { getBand, getRecommendations, CATEGORIES, QUESTIONS } from "@/lib/scorecard-config";
+import type { AssessmentResult, LeadData } from "@/context/AppContext";
 
 interface LeadRow {
   id: string;
