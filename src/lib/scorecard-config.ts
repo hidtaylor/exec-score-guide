@@ -2,6 +2,7 @@ export interface ScorecardQuestion {
   id: number;
   category: string;
   question: string;
+  tooltip: string;
   labels: [string, string]; // [low label, high label]
 }
 
@@ -18,75 +19,84 @@ export const QUESTIONS: ScorecardQuestion[] = [
     id: 1,
     category: "Data Readiness",
     question: "How centralized and accessible is your brokerage's transaction, client, and agent data?",
+    tooltip: "Can your team easily find all client, deal, and agent info in one place — or is it spread across spreadsheets, email, and different apps?",
     labels: ["Scattered across systems", "Fully centralized and accessible"],
   },
   {
     id: 2,
     category: "Data Readiness",
     question: "How clean and standardized is your data for AI/ML consumption?",
+    tooltip: "Is your data organized and labeled well enough that a computer could read and learn from it without a lot of cleanup first?",
     labels: ["Inconsistent and messy", "Clean, tagged, and ML-ready"],
   },
   {
     id: 3,
     category: "Data Readiness",
     question: "Do you have a defined data governance owner or process?",
+    tooltip: "Is there a specific person or team responsible for making sure your data stays accurate and up to date?",
     labels: ["No ownership", "Dedicated data steward/process"],
   },
-  // Workflow Execution (q4-q6)
   {
     id: 4,
     category: "Workflow Execution",
     question: "How automated are your core operational workflows (onboarding, compliance, marketing)?",
+    tooltip: "How much of your day-to-day work (like onboarding new agents or sending marketing) runs on autopilot vs. requiring manual effort?",
     labels: ["Mostly manual", "Fully automated end-to-end"],
   },
   {
     id: 5,
     category: "Workflow Execution",
     question: "Are AI tools currently integrated into any agent-facing or back-office workflows?",
+    tooltip: "Are any AI tools (like smart assistants, auto-responses, or predictive analytics) actually being used in daily work?",
     labels: ["No AI in use", "AI embedded in multiple workflows"],
   },
   {
     id: 6,
     category: "Workflow Execution",
     question: "How well do your current tech systems integrate with each other?",
+    tooltip: "Do your CRM, marketing tools, transaction platform, etc. share data automatically, or do people have to copy-paste between them?",
     labels: ["Siloed and disconnected", "Seamless API-driven integration"],
   },
-  // Governance (q7-q9)
   {
     id: 7,
     category: "Governance",
     question: "Does your brokerage have a formal AI usage policy?",
+    tooltip: "Has your company written down rules about how and when AI tools should (and shouldn't) be used?",
     labels: ["No policy exists", "Documented and enforced policy"],
   },
   {
     id: 8,
     category: "Governance",
     question: "How do you manage compliance and risk related to AI-generated outputs?",
+    tooltip: "When AI creates content or makes suggestions, does someone review it before it goes to clients? Is there a record of what was checked?",
     labels: ["No process in place", "Systematic review and audit trail"],
   },
   {
     id: 9,
     category: "Governance",
     question: "Is there executive sponsorship for AI transformation initiatives?",
+    tooltip: "Is there a senior leader actively pushing for AI adoption and willing to fund it?",
     labels: ["No executive sponsor", "C-level champion with budget"],
   },
-  // Adoption & ROI (q10-q12)
   {
     id: 10,
     category: "Adoption & ROI",
     question: "What percentage of your agents actively use AI tools provided by the brokerage?",
+    tooltip: "Out of all your agents, how many are actually logging in and using the AI tools you provide?",
     labels: ["Less than 10%", "More than 75%"],
   },
   {
     id: 11,
     category: "Adoption & ROI",
     question: "Do you measure ROI on your AI/technology investments?",
+    tooltip: "Do you track whether your tech investments are actually saving time or making money, with real numbers?",
     labels: ["No measurement", "Clear KPIs and dashboards"],
   },
   {
     id: 12,
     category: "Adoption & ROI",
     question: "How would you rate agent satisfaction with current AI tools?",
+    tooltip: "Do your agents find the AI tools helpful and easy to use, or do they ignore or complain about them?",
     labels: ["Frustrated or unaware", "High satisfaction and demand for more"],
   },
 ];
