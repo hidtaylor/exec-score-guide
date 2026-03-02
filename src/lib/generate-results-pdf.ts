@@ -59,7 +59,9 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
     doc.text(`Prepared for: ${lead.firstName} ${lead.lastName}`, margin, y);
     doc.text(`Brokerage: ${lead.brokerageName}`, margin, y + 14);
     doc.text(`Date: ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`, margin, y + 28);
-    y += 50;
+
+    // Add extra buffer after the date so the large score never overlaps it
+    y += 66;
   }
 
   // --- Overall Score ---
