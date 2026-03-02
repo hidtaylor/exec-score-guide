@@ -293,14 +293,7 @@ export default function Admin() {
     );
   }
 
-  if (isAdmin === null) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <div className="container py-24 text-center text-muted-foreground">Checking access…</div>
-      </div>
-    );
-  }
+
 
   if (!isAdmin) {
     return (
