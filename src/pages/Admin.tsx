@@ -242,6 +242,15 @@ export default function Admin() {
     }
   };
 
+  if (!sessionChecked) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="container py-24 text-center text-muted-foreground">Loading…</div>
+      </div>
+    );
+  }
+
   if (!authed) {
     return (
       <div className="min-h-screen bg-background">
