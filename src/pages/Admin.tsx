@@ -63,18 +63,26 @@ export default function Admin() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [changingPassword, setChangingPassword] = useState(false);
 
+  const [sessionChecked, setSessionChecked] = useState(false);
+
   const checkAdminRole = async (userId: string) => {
-    const { data, error } = await supabase.rpc("has_role", {
-      _user_id: userId,
-      _role: "admin",
-    });
-    if (error) {
-      console.error("Role check failed:", error);
+    try {
+      const { data, error } = await supabase.rpc("has_role", {
+        _user_id: userId,
+        _role: "admin",
+      });
+      if (error) {
+        console.error("Role check failed:", error);
+        setIsAdmin(false);
+        return false;
+      }
+      setIsAdmin(!!data);
+      return !!data;
+    } catch (err) {
+      console.error("Role check exception:", err);
       setIsAdmin(false);
       return false;
     }
-    setIsAdmin(!!data);
-    return !!data;
   };
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -93,17 +101,22 @@ export default function Admin() {
   };
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (session) {
         setAuthed(true);
         await checkAdminRole(session.user.id);
+      } else {
+        setAuthed(false);
+        setIsAdmin(null);
       }
+      setSessionChecked(true);
     });
     supabase.auth.getSession().then(async ({ data: { session } }) => {
       if (session) {
         setAuthed(true);
         await checkAdminRole(session.user.id);
       }
+      setSessionChecked(true);
     });
     return () => subscription.unsubscribe();
   }, []);
@@ -229,6 +242,15 @@ export default function Admin() {
     }
   };
 
+  if (!sessionChecked) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="container py-24 text-center text-muted-foreground">Loading…</div>
+      </div>
+    );
+  }
+
   if (!authed) {
     return (
       <div className="min-h-screen bg-background">
@@ -271,14 +293,7 @@ export default function Admin() {
     );
   }
 
-  if (isAdmin === null) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <div className="container py-24 text-center text-muted-foreground">Checking access…</div>
-      </div>
-    );
-  }
+
 
   if (!isAdmin) {
     return (
