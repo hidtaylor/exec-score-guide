@@ -63,18 +63,26 @@ export default function Admin() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [changingPassword, setChangingPassword] = useState(false);
 
+  const [sessionChecked, setSessionChecked] = useState(false);
+
   const checkAdminRole = async (userId: string) => {
-    const { data, error } = await supabase.rpc("has_role", {
-      _user_id: userId,
-      _role: "admin",
-    });
-    if (error) {
-      console.error("Role check failed:", error);
+    try {
+      const { data, error } = await supabase.rpc("has_role", {
+        _user_id: userId,
+        _role: "admin",
+      });
+      if (error) {
+        console.error("Role check failed:", error);
+        setIsAdmin(false);
+        return false;
+      }
+      setIsAdmin(!!data);
+      return !!data;
+    } catch (err) {
+      console.error("Role check exception:", err);
       setIsAdmin(false);
       return false;
     }
-    setIsAdmin(!!data);
-    return !!data;
   };
 
   const handleLogin = async (e: React.FormEvent) => {
