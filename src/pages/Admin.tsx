@@ -204,7 +204,7 @@ export default function Admin() {
     }
   };
 
-
+  const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
     if (newPassword.length < 8) {
       toast.error("Password must be at least 8 characters");
