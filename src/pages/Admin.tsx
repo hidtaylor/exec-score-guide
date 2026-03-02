@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/table";
 import Header from "@/components/Header";
 import { supabase } from "@/integrations/supabase/client";
-import { Download, LogIn } from "lucide-react";
+import { Download, LogIn, KeyRound } from "lucide-react";
 import { toast } from "sonner";
 
 interface LeadRow {
