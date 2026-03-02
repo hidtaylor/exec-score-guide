@@ -154,7 +154,57 @@ export default function Admin() {
     URL.revokeObjectURL(url);
   };
 
-  const handleChangePassword = async (e: React.FormEvent) => {
+  const handleDownloadPDF = async (lead: LeadRow) => {
+    const a = lead.assessments?.[0];
+    if (!a || a.total_score == null || !a.band) {
+      toast.error("No assessment data available for this lead.");
+      return;
+    }
+
+    const answers: Record<number, number> = {};
+    for (let i = 1; i <= 12; i++) {
+      const val = (a as any)[`q${i}`];
+      if (val != null) answers[i] = val;
+    }
+
+    const categoryScores: Record<string, number> = {
+      "Data Readiness": a.category_data_readiness ?? 0,
+      "Workflow Execution": a.category_workflow_execution ?? 0,
+      "Governance": a.category_governance ?? 0,
+      "Adoption & ROI": a.category_adoption_roi ?? 0,
+    };
+
+    const recommendations = getRecommendations(categoryScores);
+
+    const assessmentResult: AssessmentResult = {
+      answers,
+      totalScore: a.total_score,
+      band: a.band as any,
+      categoryScores,
+      recommendations,
+    };
+
+    const leadData: LeadData = {
+      id: lead.id,
+      firstName: lead.first_name || "",
+      lastName: lead.last_name || "",
+      email: lead.email,
+      brokerageName: lead.brokerage_name || "",
+      agentCount: lead.agent_count || "",
+      topPriority: lead.top_priority || "",
+      consent: true,
+    };
+
+    try {
+      await generateResultsPDF(assessmentResult, leadData);
+      toast.success("PDF downloaded");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to generate PDF");
+    }
+  };
+
+
     e.preventDefault();
     if (newPassword.length < 8) {
       toast.error("Password must be at least 8 characters");
