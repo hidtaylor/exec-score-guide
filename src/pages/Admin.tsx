@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/table";
 import Header from "@/components/Header";
 import { supabase } from "@/integrations/supabase/client";
-import { Download, LogIn } from "lucide-react";
+import { Download, LogIn, KeyRound } from "lucide-react";
 import { toast } from "sonner";
 
 interface LeadRow {
@@ -45,6 +45,10 @@ export default function Admin() {
   const [loading, setLoading] = useState(false);
   const [leads, setLeads] = useState<LeadRow[]>([]);
   const [bandFilter, setBandFilter] = useState("all");
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [changingPassword, setChangingPassword] = useState(false);
 
   const checkAdminRole = async (userId: string) => {
     const { data, error } = await supabase.rpc("has_role", {
@@ -137,6 +141,31 @@ export default function Admin() {
     URL.revokeObjectURL(url);
   };
 
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newPassword.length < 8) {
+      toast.error("Password must be at least 8 characters");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+    setChangingPassword(true);
+    try {
+      const { error } = await supabase.auth.updateUser({ password: newPassword });
+      if (error) throw error;
+      toast.success("Password updated successfully");
+      setNewPassword("");
+      setConfirmPassword("");
+      setShowPasswordForm(false);
+    } catch (err: any) {
+      toast.error(err.message || "Failed to update password");
+    } finally {
+      setChangingPassword(false);
+    }
+  };
+
   if (!authed) {
     return (
       <div className="min-h-screen bg-background">
@@ -213,7 +242,7 @@ export default function Admin() {
             <h1 className="text-display-sm text-foreground">Lead Management</h1>
             <p className="text-sm text-muted-foreground mt-1">{filteredLeads.length} leads total</p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-wrap">
             <Select value={bandFilter} onValueChange={setBandFilter}>
               <SelectTrigger className="w-52">
                 <SelectValue placeholder="Filter by maturity band" />
@@ -229,8 +258,36 @@ export default function Admin() {
               <Download className="h-4 w-4 mr-2" />
               Export CSV
             </Button>
+            <Button variant="outline" onClick={() => setShowPasswordForm(!showPasswordForm)}>
+              <KeyRound className="h-4 w-4 mr-2" />
+              Change Password
+            </Button>
           </div>
         </div>
+
+        {showPasswordForm && (
+          <div className="border border-border rounded p-6 mb-8 max-w-md">
+            <h2 className="text-sm font-semibold text-foreground mb-4">Change Password</h2>
+            <form onSubmit={handleChangePassword} className="space-y-3">
+              <div className="space-y-1.5">
+                <Label htmlFor="new-password" className="text-xs font-medium uppercase tracking-wide text-muted-foreground">New Password</Label>
+                <Input id="new-password" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required minLength={8} />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="confirm-password" className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Confirm Password</Label>
+                <Input id="confirm-password" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required minLength={8} />
+              </div>
+              <div className="flex gap-2">
+                <Button type="submit" variant="hero" disabled={changingPassword}>
+                  {changingPassword ? "Updating…" : "Update Password"}
+                </Button>
+                <Button type="button" variant="outline" onClick={() => { setShowPasswordForm(false); setNewPassword(""); setConfirmPassword(""); }}>
+                  Cancel
+                </Button>
+              </div>
+            </form>
+          </div>
+        )}
 
         <div className="border border-border rounded overflow-hidden">
           <div className="overflow-x-auto">
