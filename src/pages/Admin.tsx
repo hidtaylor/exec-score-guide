@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -117,27 +118,36 @@ export default function Admin() {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        <div className="container max-w-sm py-20">
-          <div className="bg-card border border-border rounded-lg p-6 space-y-4">
-            <h1 className="text-xl font-semibold text-foreground text-center">Admin Login</h1>
+        <div className="container max-w-sm py-24">
+          <div className="border border-border rounded p-8 space-y-6">
+            <div className="text-center">
+              <h1 className="text-display-sm text-foreground">Admin Access</h1>
+              <p className="text-xs text-muted-foreground mt-1">Sign in to view lead data</p>
+            </div>
             <form onSubmit={handleLogin} className="space-y-4">
-              <Input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <Input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+              <div className="space-y-1.5">
+                <Label htmlFor="admin-email" className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Email</Label>
+                <Input
+                  id="admin-email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="admin-password" className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Password</Label>
+                <Input
+                  id="admin-password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
               <Button type="submit" variant="hero" className="w-full" disabled={loading}>
                 <LogIn className="h-4 w-4 mr-2" />
-                {loading ? "Signing in..." : "Sign In"}
+                {loading ? "Signing In..." : "Sign In"}
               </Button>
             </form>
           </div>
@@ -149,16 +159,17 @@ export default function Admin() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <div className="container py-8">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+      <div className="container py-10">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-2xl font-semibold text-foreground">Leads Dashboard</h1>
-            <p className="text-sm text-muted-foreground">{filteredLeads.length} leads</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-1">Dashboard</p>
+            <h1 className="text-display-sm text-foreground">Lead Management</h1>
+            <p className="text-sm text-muted-foreground mt-1">{filteredLeads.length} leads total</p>
           </div>
           <div className="flex gap-3">
             <Select value={bandFilter} onValueChange={setBandFilter}>
-              <SelectTrigger className="w-48">
-                <SelectValue placeholder="Filter by band" />
+              <SelectTrigger className="w-52">
+                <SelectValue placeholder="Filter by maturity band" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Bands</SelectItem>
@@ -174,40 +185,40 @@ export default function Admin() {
           </div>
         </div>
 
-        <div className="border border-border rounded-lg overflow-hidden">
+        <div className="border border-border rounded overflow-hidden">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
-                <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Email</TableHead>
-                  <TableHead>Brokerage</TableHead>
-                  <TableHead>Agents</TableHead>
-                  <TableHead>Priority</TableHead>
-                  <TableHead>Score</TableHead>
-                  <TableHead>Band</TableHead>
-                  <TableHead>Date</TableHead>
+                <TableRow className="bg-muted/50">
+                  <TableHead className="text-xs font-semibold uppercase tracking-wide">Name</TableHead>
+                  <TableHead className="text-xs font-semibold uppercase tracking-wide">Email</TableHead>
+                  <TableHead className="text-xs font-semibold uppercase tracking-wide">Brokerage</TableHead>
+                  <TableHead className="text-xs font-semibold uppercase tracking-wide">Agents</TableHead>
+                  <TableHead className="text-xs font-semibold uppercase tracking-wide">Priority</TableHead>
+                  <TableHead className="text-xs font-semibold uppercase tracking-wide">Score</TableHead>
+                  <TableHead className="text-xs font-semibold uppercase tracking-wide">Band</TableHead>
+                  <TableHead className="text-xs font-semibold uppercase tracking-wide">Date</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredLeads.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={8} className="text-center text-muted-foreground py-10">
-                      No leads yet.
+                    <TableCell colSpan={8} className="text-center text-muted-foreground py-12 text-sm">
+                      No leads recorded yet.
                     </TableCell>
                   </TableRow>
                 ) : (
                   filteredLeads.map((l) => (
                     <TableRow key={l.id}>
-                      <TableCell className="font-medium">{[l.first_name, l.last_name].filter(Boolean).join(" ") || "—"}</TableCell>
-                      <TableCell>{l.email}</TableCell>
-                      <TableCell>{l.brokerage_name || "—"}</TableCell>
-                      <TableCell>{l.agent_count || "—"}</TableCell>
-                      <TableCell>{l.top_priority || "—"}</TableCell>
-                      <TableCell>{l.assessments?.[0]?.total_score ?? "—"}</TableCell>
+                      <TableCell className="font-medium text-sm">{[l.first_name, l.last_name].filter(Boolean).join(" ") || "—"}</TableCell>
+                      <TableCell className="text-sm">{l.email}</TableCell>
+                      <TableCell className="text-sm">{l.brokerage_name || "—"}</TableCell>
+                      <TableCell className="text-sm">{l.agent_count || "—"}</TableCell>
+                      <TableCell className="text-sm">{l.top_priority || "—"}</TableCell>
+                      <TableCell className="text-sm font-medium">{l.assessments?.[0]?.total_score ?? "—"}</TableCell>
                       <TableCell>
                         {l.assessments?.[0]?.band ? (
-                          <span className={`text-xs font-medium px-2 py-1 rounded-md ${
+                          <span className={`text-xs font-medium px-2.5 py-1 rounded ${
                             l.assessments[0].band === "Transformation-Ready" ? "bg-success/10 text-success" :
                             l.assessments[0].band === "Operational but Fragmented" ? "bg-warning/10 text-warning" :
                             "bg-destructive/10 text-destructive"
@@ -216,7 +227,7 @@ export default function Admin() {
                           </span>
                         ) : "—"}
                       </TableCell>
-                      <TableCell className="text-muted-foreground">{new Date(l.created_at).toLocaleDateString()}</TableCell>
+                      <TableCell className="text-sm text-muted-foreground">{new Date(l.created_at).toLocaleDateString()}</TableCell>
                     </TableRow>
                   ))
                 )}
