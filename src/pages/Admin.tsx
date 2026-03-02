@@ -25,6 +25,19 @@ import { generateResultsPDF } from "@/lib/generate-results-pdf";
 import { getBand, getRecommendations, CATEGORIES, QUESTIONS } from "@/lib/scorecard-config";
 import type { AssessmentResult, LeadData } from "@/context/AppContext";
 
+interface AssessmentRow {
+  total_score: number | null;
+  band: string | null;
+  q1: number | null; q2: number | null; q3: number | null;
+  q4: number | null; q5: number | null; q6: number | null;
+  q7: number | null; q8: number | null; q9: number | null;
+  q10: number | null; q11: number | null; q12: number | null;
+  category_data_readiness: number | null;
+  category_workflow_execution: number | null;
+  category_governance: number | null;
+  category_adoption_roi: number | null;
+}
+
 interface LeadRow {
   id: string;
   first_name: string | null;
@@ -34,10 +47,7 @@ interface LeadRow {
   agent_count: string | null;
   top_priority: string | null;
   created_at: string;
-  assessments: {
-    total_score: number | null;
-    band: string | null;
-  }[];
+  assessments: AssessmentRow[];
 }
 
 export default function Admin() {
