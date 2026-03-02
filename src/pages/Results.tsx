@@ -104,33 +104,69 @@ export default function Results() {
           </div>
         </div>
 
-        {/* CTA Block */}
-        <div className="bg-primary text-primary-foreground rounded p-10 md:p-14 text-center space-y-5 animate-fade-in" style={{ animationDelay: "0.25s" }}>
-          <h2 className="text-display-sm">Schedule a Strategy Review</h2>
-          <p className="text-primary-foreground/70 max-w-lg mx-auto text-sm leading-relaxed">
-            Book a complimentary 30-minute consultation to review your results and develop a tailored roadmap for your brokerage.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
-            <Button
-              variant="hero-outline"
-              className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground hover:text-primary"
-              asChild
-            >
-              <Link to="/thanks">
-                <Calendar className="h-4 w-4 mr-2" />
-                Book Consultation
-              </Link>
-            </Button>
-            <Button
-              variant="ghost"
-              className="text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10"
-              asChild
-            >
-              <a href="/quickstart-kit.pdf" download>
-                <Download className="h-4 w-4 mr-2" />
-                Download Report (PDF)
-              </a>
-            </Button>
+        {/* Download */}
+        <div className="text-center animate-fade-in" style={{ animationDelay: "0.25s" }}>
+          <Button
+            variant="hero"
+            onClick={() => generateResultsPDF(assessment, lead)}
+          >
+            <Download className="h-4 w-4 mr-2" />
+            Download Your Results (PDF)
+          </Button>
+        </div>
+
+        {/* Contact CTA */}
+        <div className="bg-primary text-primary-foreground rounded p-10 md:p-14 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+          <div className="flex flex-col md:flex-row items-center gap-10">
+            <div className="flex-1 space-y-4 text-center md:text-left">
+              <p className="text-xs font-semibold tracking-widest uppercase text-primary-foreground/60">
+                Next Step
+              </p>
+              <h2 className="text-display-sm">Let's Build Your AI Roadmap</h2>
+              <div className="space-y-1">
+                <p className="font-semibold text-sm">Derek Taylor</p>
+                <p className="text-primary-foreground/70 text-sm">
+                  VP of Technology Consulting and AI Transformation
+                </p>
+                <p className="text-primary-foreground/70 text-sm">T3 Sixty</p>
+              </div>
+              <p className="text-primary-foreground/60 text-sm leading-relaxed max-w-md">
+                Book a complimentary 30-minute consultation to review your results and develop a tailored roadmap for your brokerage.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-2">
+                <Button
+                  variant="hero-outline"
+                  className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                  asChild
+                >
+                  <Link to="/thanks">
+                    <Calendar className="h-4 w-4 mr-2" />
+                    Book Consultation
+                  </Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10"
+                  asChild
+                >
+                  <a href="mailto:derek.taylor@t3sixty.com">
+                    <Mail className="h-4 w-4 mr-2" />
+                    Email Derek
+                  </a>
+                </Button>
+              </div>
+            </div>
+            <div className="flex flex-col items-center gap-3 shrink-0">
+              <div className="bg-primary-foreground rounded-lg p-3">
+                <QRCode
+                  url="https://calendly.com/derek-taylor-2/t3-sixty-brokerage-ai-readiness-consultation"
+                  size={140}
+                />
+              </div>
+              <p className="text-xs text-primary-foreground/50 text-center">
+                Scan to schedule a<br />30-min consultation
+              </p>
+            </div>
           </div>
         </div>
       </div>
