@@ -74,14 +74,12 @@ export default function Admin() {
       if (error) {
         console.error("Role check failed:", error);
         setIsAdmin(false);
-        return false;
+        return;
       }
       setIsAdmin(!!data);
-      return !!data;
     } catch (err) {
       console.error("Role check exception:", err);
       setIsAdmin(false);
-      return false;
     }
   };
 
@@ -101,24 +99,36 @@ export default function Admin() {
   };
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (session) {
-        setAuthed(true);
-        await checkAdminRole(session.user.id);
-      } else {
-        setAuthed(false);
-        setIsAdmin(null);
-      }
-      setSessionChecked(true);
-    });
+    let mounted = true;
+
     supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (!mounted) return;
       if (session) {
         setAuthed(true);
         await checkAdminRole(session.user.id);
       }
       setSessionChecked(true);
     });
-    return () => subscription.unsubscribe();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        if (!mounted) return;
+        if (session) {
+          setAuthed(true);
+          // Fire and forget - don't await inside onAuthStateChange
+          checkAdminRole(session.user.id);
+        } else {
+          setAuthed(false);
+          setIsAdmin(null);
+        }
+        setSessionChecked(true);
+      }
+    );
+
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   useEffect(() => {
