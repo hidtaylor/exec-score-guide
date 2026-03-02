@@ -365,12 +365,13 @@ export default function Admin() {
                   <TableHead className="text-xs font-semibold uppercase tracking-wide">Score</TableHead>
                   <TableHead className="text-xs font-semibold uppercase tracking-wide">Band</TableHead>
                   <TableHead className="text-xs font-semibold uppercase tracking-wide">Date</TableHead>
+                  <TableHead className="text-xs font-semibold uppercase tracking-wide w-16">PDF</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredLeads.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={8} className="text-center text-muted-foreground py-12 text-sm">
+                    <TableCell colSpan={9} className="text-center text-muted-foreground py-12 text-sm">
                       No leads recorded yet.
                     </TableCell>
                   </TableRow>
@@ -395,6 +396,13 @@ export default function Admin() {
                         ) : "—"}
                       </TableCell>
                       <TableCell className="text-sm text-muted-foreground">{new Date(l.created_at).toLocaleDateString()}</TableCell>
+                      <TableCell>
+                        {l.assessments?.[0]?.total_score != null ? (
+                          <Button variant="ghost" size="sm" onClick={() => handleDownloadPDF(l)} className="h-8 w-8 p-0">
+                            <FileDown className="h-4 w-4" />
+                          </Button>
+                        ) : "—"}
+                      </TableCell>
                     </TableRow>
                   ))
                 )}
