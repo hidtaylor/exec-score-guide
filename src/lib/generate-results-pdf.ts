@@ -1,5 +1,6 @@
 import jsPDF from "jspdf";
 import type { AssessmentResult, LeadData } from "@/context/AppContext";
+import calendlyQrImg from "@/assets/calendly-qr.jpg";
 import { getBandDescription, QUICKSTART_TIMELINE, CATEGORIES } from "@/lib/scorecard-config";
 
 const CALENDLY_URL = "https://calendly.com/derek-taylor-2/t3-sixty-brokerage-ai-readiness-consultation";
@@ -8,7 +9,7 @@ function setColor(doc: jsPDF, r: number, g: number, b: number) {
   doc.setTextColor(r, g, b);
 }
 
-export function generateResultsPDF(assessment: AssessmentResult, lead: LeadData | null) {
+export async function generateResultsPDF(assessment: AssessmentResult, lead: LeadData | null) {
   const doc = new jsPDF({ unit: "pt", format: "letter" });
   const pageW = doc.internal.pageSize.getWidth();
   const margin = 50;
@@ -147,22 +148,60 @@ export function generateResultsPDF(assessment: AssessmentResult, lead: LeadData 
     y += 10;
   });
 
-  // --- Footer / Contact ---
-  if (y > 640) { doc.addPage(); y = margin; }
+  // --- Footer / Contact with QR ---
+  if (y > 560) { doc.addPage(); y = margin; }
   doc.line(margin, y, pageW - margin, y);
   y += 20;
+
+  const qrSize = 100;
+  const textX = margin;
+  const qrX = pageW - margin - qrSize;
+  const footerStartY = y;
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(10);
   setColor(doc, 35, 40, 50);
-  doc.text("Ready to accelerate your AI transformation?", margin, y);
+  doc.text("Ready to accelerate your AI transformation?", textX, y);
   y += 16;
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
   setColor(doc, 100, 105, 115);
-  doc.text("Derek Taylor  |  VP of Technology Consulting and AI Transformation  |  T3 Sixty", margin, y);
-  y += 14;
-  doc.text(`Book a 30-min consultation: ${CALENDLY_URL}`, margin, y);
+  doc.text("Derek Taylor", textX, y);
+  y += 12;
+  doc.text("VP of Technology Consulting and AI Transformation", textX, y);
+  y += 12;
+  doc.text("T3 Sixty", textX, y);
+  y += 16;
+  doc.text("derek.taylor@t3sixty.com", textX, y);
+  y += 12;
+  doc.setFontSize(8);
+  doc.text(`Book a 30-min consultation: ${CALENDLY_URL}`, textX, y);
+
+  // Add QR code image
+  try {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    await new Promise<void>((resolve, reject) => {
+      img.onload = () => resolve();
+      img.onerror = reject;
+      img.src = calendlyQrImg;
+    });
+
+    const canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext("2d");
+    if (ctx) {
+      ctx.drawImage(img, 0, 0);
+      const dataUrl = canvas.toDataURL("image/jpeg");
+      doc.addImage(dataUrl, "JPEG", qrX, footerStartY, qrSize, qrSize);
+      doc.setFontSize(7);
+      setColor(doc, 130, 130, 130);
+      doc.text("Scan to schedule", qrX + qrSize / 2, footerStartY + qrSize + 10, { align: "center" });
+    }
+  } catch {
+    // QR image failed to load — skip silently
+  }
 
   doc.save("T3-Sixty-AI-Readiness-Results.pdf");
 }
