@@ -265,7 +265,30 @@ export default function Admin() {
           </div>
         </div>
 
-        <div className="border border-border rounded overflow-hidden">
+        {showPasswordForm && (
+          <div className="border border-border rounded p-6 mb-8 max-w-md">
+            <h2 className="text-sm font-semibold text-foreground mb-4">Change Password</h2>
+            <form onSubmit={handleChangePassword} className="space-y-3">
+              <div className="space-y-1.5">
+                <Label htmlFor="new-password" className="text-xs font-medium uppercase tracking-wide text-muted-foreground">New Password</Label>
+                <Input id="new-password" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required minLength={8} />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="confirm-password" className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Confirm Password</Label>
+                <Input id="confirm-password" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required minLength={8} />
+              </div>
+              <div className="flex gap-2">
+                <Button type="submit" variant="hero" disabled={changingPassword}>
+                  {changingPassword ? "Updating…" : "Update Password"}
+                </Button>
+                <Button type="button" variant="outline" onClick={() => { setShowPasswordForm(false); setNewPassword(""); setConfirmPassword(""); }}>
+                  Cancel
+                </Button>
+              </div>
+            </form>
+          </div>
+        )}
+
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
