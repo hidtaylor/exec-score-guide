@@ -48,21 +48,21 @@ export function generateResultsPDF(assessment: AssessmentResult, lead: LeadData 
   doc.setFontSize(14);
   setColor(doc, 100, 105, 115);
   doc.text("/60", margin + doc.getTextWidth(`${assessment.totalScore}`) + 4, y);
-  y += 10;
+  y += 32;
 
   doc.setFontSize(12);
   doc.setFont("helvetica", "bold");
   setColor(doc, 55, 100, 115);
-  doc.text(assessment.band.toUpperCase(), margin, y + 14);
-  y += 20;
+  doc.text(assessment.band.toUpperCase(), margin, y);
+  y += 18;
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
   setColor(doc, 100, 105, 115);
   const bandDesc = getBandDescription(assessment.band);
   const bandLines = doc.splitTextToSize(bandDesc, contentW);
-  doc.text(bandLines, margin, y + 12);
-  y += 12 + bandLines.length * 12 + 16;
+  doc.text(bandLines, margin, y);
+  y += bandLines.length * 12 + 16;
 
   // --- Category Scores ---
   doc.setFont("helvetica", "bold");
