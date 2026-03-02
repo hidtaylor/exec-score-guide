@@ -20,6 +20,13 @@ export default function Scorecard() {
   const [currentCategory, setCurrentCategory] = useState(0);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (!lead) {
+      toast.error("Please complete the form to begin your assessment.");
+      navigate("/");
+    }
+  }, [lead, navigate]);
+
   const categoryQuestions = QUESTIONS.filter(
     (q) => q.category === CATEGORIES[currentCategory]
   );
