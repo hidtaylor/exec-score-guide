@@ -3,7 +3,9 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import { useAppContext } from "@/context/AppContext";
 import { getBandDescription, QUICKSTART_TIMELINE, CATEGORIES } from "@/lib/scorecard-config";
-import { Download, Calendar } from "lucide-react";
+import { generateResultsPDF } from "@/lib/generate-results-pdf";
+import QRCode from "@/components/QRCode";
+import { Download, Calendar, Mail } from "lucide-react";
 
 const CALENDLY_URL = "https://calendly.com/derek-taylor-2/t3-sixty-brokerage-ai-readiness-consultation";
 
