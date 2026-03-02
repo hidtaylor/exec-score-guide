@@ -33,7 +33,7 @@ export default function LeadCaptureForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.email) {
-      toast.error("Email is required.");
+      toast.error("Please provide your email address.");
       return;
     }
     if (!form.consent) {
@@ -70,7 +70,7 @@ export default function LeadCaptureForm() {
         consent: form.consent,
       });
 
-      toast.success("You're in! Starting your scorecard...");
+      toast.success("Assessment ready. Redirecting...");
       navigate("/scorecard");
     } catch (err) {
       console.error(err);
@@ -81,10 +81,10 @@ export default function LeadCaptureForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <Label htmlFor="firstName">First Name</Label>
+        <div className="space-y-1.5">
+          <Label htmlFor="firstName" className="text-xs font-medium uppercase tracking-wide text-muted-foreground">First Name</Label>
           <Input
             id="firstName"
             value={form.firstName}
@@ -92,8 +92,8 @@ export default function LeadCaptureForm() {
             placeholder="Jane"
           />
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="lastName">Last Name</Label>
+        <div className="space-y-1.5">
+          <Label htmlFor="lastName" className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Last Name</Label>
           <Input
             id="lastName"
             value={form.lastName}
@@ -103,8 +103,8 @@ export default function LeadCaptureForm() {
         </div>
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="email">Email *</Label>
+      <div className="space-y-1.5">
+        <Label htmlFor="email" className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Work Email *</Label>
         <Input
           id="email"
           type="email"
@@ -115,8 +115,8 @@ export default function LeadCaptureForm() {
         />
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="brokerage">Brokerage Name</Label>
+      <div className="space-y-1.5">
+        <Label htmlFor="brokerage" className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Brokerage Name</Label>
         <Input
           id="brokerage"
           value={form.brokerageName}
@@ -126,8 +126,8 @@ export default function LeadCaptureForm() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <Label>Agent Count</Label>
+        <div className="space-y-1.5">
+          <Label className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Agent Count</Label>
           <Select value={form.agentCount} onValueChange={(v) => setForm({ ...form, agentCount: v })}>
             <SelectTrigger>
               <SelectValue placeholder="Select range" />
@@ -139,8 +139,8 @@ export default function LeadCaptureForm() {
             </SelectContent>
           </Select>
         </div>
-        <div className="space-y-2">
-          <Label>Top AI Priority</Label>
+        <div className="space-y-1.5">
+          <Label className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Top Priority</Label>
           <Select value={form.topPriority} onValueChange={(v) => setForm({ ...form, topPriority: v })}>
             <SelectTrigger>
               <SelectValue placeholder="Select priority" />
@@ -154,19 +154,19 @@ export default function LeadCaptureForm() {
         </div>
       </div>
 
-      <div className="flex items-start gap-3 pt-2">
+      <div className="flex items-start gap-3 pt-1">
         <Checkbox
           id="consent"
           checked={form.consent}
           onCheckedChange={(checked) => setForm({ ...form, consent: checked === true })}
         />
-        <Label htmlFor="consent" className="text-sm text-muted-foreground leading-snug cursor-pointer">
+        <Label htmlFor="consent" className="text-xs text-muted-foreground leading-relaxed cursor-pointer">
           I agree to receive communications about AI transformation resources and strategy insights. You can unsubscribe at any time.
         </Label>
       </div>
 
       <Button type="submit" variant="hero" className="w-full" disabled={loading}>
-        {loading ? "Submitting..." : "Start the 10-Minute Scorecard"}
+        {loading ? "Submitting..." : "Begin Assessment"}
       </Button>
     </form>
   );

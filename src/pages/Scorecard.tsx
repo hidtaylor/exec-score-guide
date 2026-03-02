@@ -92,30 +92,30 @@ export default function Scorecard() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <div className="container max-w-2xl py-10 md:py-16">
+      <div className="container max-w-2xl py-12 md:py-20">
         {/* Progress */}
-        <div className="mb-8 space-y-2">
-          <div className="flex items-center justify-between text-sm text-muted-foreground">
-            <span>AI Maturity Scorecard</span>
-            <span>{answeredCount} of {QUESTIONS.length} answered · ~{Math.max(1, Math.ceil((QUESTIONS.length - answeredCount) * 0.8))} min left</span>
+        <div className="mb-10 space-y-3">
+          <div className="flex items-center justify-between text-xs text-muted-foreground uppercase tracking-wide">
+            <span>AI Maturity Assessment</span>
+            <span>{answeredCount} of {QUESTIONS.length} complete</span>
           </div>
-          <Progress value={progress} className="h-2" />
+          <Progress value={progress} className="h-1.5" />
         </div>
 
-        {/* Category */}
-        <div className="flex gap-2 mb-8 flex-wrap">
+        {/* Category Tabs */}
+        <div className="flex gap-1 mb-10 flex-wrap">
           {CATEGORIES.map((cat, i) => (
             <button
               key={cat}
               onClick={() => {
                 if (i <= currentCategory) setCurrentCategory(i);
               }}
-              className={`text-sm px-3 py-1.5 rounded-md border transition-colors ${
+              className={`text-xs font-medium px-4 py-2 rounded transition-colors tracking-wide uppercase ${
                 i === currentCategory
-                  ? "bg-primary text-primary-foreground border-primary"
+                  ? "bg-primary text-primary-foreground"
                   : i < currentCategory
-                  ? "bg-secondary text-foreground border-border cursor-pointer"
-                  : "bg-muted text-muted-foreground border-border cursor-default"
+                  ? "bg-muted text-foreground cursor-pointer hover:bg-muted/80"
+                  : "text-muted-foreground cursor-default"
               }`}
             >
               {cat}
@@ -123,12 +123,20 @@ export default function Scorecard() {
           ))}
         </div>
 
+        {/* Section Label */}
+        <div className="mb-8">
+          <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-1">
+            Section {currentCategory + 1} of {CATEGORIES.length}
+          </p>
+          <h2 className="text-display-sm text-foreground">{CATEGORIES[currentCategory]}</h2>
+        </div>
+
         {/* Questions */}
-        <div className="space-y-8">
+        <div className="space-y-10">
           {categoryQuestions.map((q) => (
             <div key={q.id} className="space-y-3 animate-fade-in">
               <p className="text-foreground font-medium leading-relaxed">
-                {q.id}. {q.question}
+                {q.question}
               </p>
               <div className="flex items-center justify-between text-xs text-muted-foreground mb-1">
                 <span>{q.labels[0]}</span>
@@ -139,10 +147,10 @@ export default function Scorecard() {
                   <button
                     key={v}
                     onClick={() => handleAnswer(q.id, v)}
-                    className={`flex-1 h-11 rounded-md border text-sm font-medium transition-all ${
+                    className={`flex-1 h-11 rounded border text-sm font-medium transition-all ${
                       answers[q.id] === v
-                        ? "bg-accent text-accent-foreground border-accent shadow-sm"
-                        : "bg-background text-foreground border-border hover:bg-secondary"
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "bg-background text-foreground border-border hover:bg-muted"
                     }`}
                     aria-label={`Rate ${v} out of 5`}
                   >
@@ -155,7 +163,7 @@ export default function Scorecard() {
         </div>
 
         {/* Navigation */}
-        <div className="flex justify-between items-center mt-10 pt-6 border-t border-border">
+        <div className="flex justify-between items-center mt-12 pt-8 border-t border-border">
           <Button
             variant="ghost"
             onClick={() => {
@@ -163,7 +171,7 @@ export default function Scorecard() {
             }}
             disabled={currentCategory === 0}
           >
-            ← Previous
+            ← Previous Section
           </Button>
           <Button
             variant="hero"
