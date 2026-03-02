@@ -11,7 +11,6 @@ export default function Header() {
         </Link>
         <nav className="hidden sm:flex items-center gap-8 text-sm text-muted-foreground">
           <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
-          <Link to="/scorecard" className="hover:text-foreground transition-colors">Assessment</Link>
         </nav>
       </div>
     </header>
