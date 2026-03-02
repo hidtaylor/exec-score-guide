@@ -141,6 +141,31 @@ export default function Admin() {
     URL.revokeObjectURL(url);
   };
 
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newPassword.length < 8) {
+      toast.error("Password must be at least 8 characters");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+    setChangingPassword(true);
+    try {
+      const { error } = await supabase.auth.updateUser({ password: newPassword });
+      if (error) throw error;
+      toast.success("Password updated successfully");
+      setNewPassword("");
+      setConfirmPassword("");
+      setShowPasswordForm(false);
+    } catch (err: any) {
+      toast.error(err.message || "Failed to update password");
+    } finally {
+      setChangingPassword(false);
+    }
+  };
+
   if (!authed) {
     return (
       <div className="min-h-screen bg-background">
