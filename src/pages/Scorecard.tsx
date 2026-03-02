@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -19,6 +19,13 @@ export default function Scorecard() {
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [currentCategory, setCurrentCategory] = useState(0);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!lead) {
+      toast.error("Please complete the form to begin your assessment.");
+      navigate("/");
+    }
+  }, [lead, navigate]);
 
   const categoryQuestions = QUESTIONS.filter(
     (q) => q.category === CATEGORIES[currentCategory]
