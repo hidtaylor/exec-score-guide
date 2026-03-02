@@ -5,7 +5,7 @@ import { useAppContext } from "@/context/AppContext";
 import { getBandDescription, QUICKSTART_TIMELINE, CATEGORIES } from "@/lib/scorecard-config";
 import { Download, Calendar } from "lucide-react";
 
-const CALENDLY_URL = "https://calendly.com/your-link";
+const CALENDLY_URL = "https://calendly.com/derek-taylor-2/t3-sixty-brokerage-ai-readiness-consultation";
 
 export default function Results() {
   const { assessment, lead } = useAppContext();
