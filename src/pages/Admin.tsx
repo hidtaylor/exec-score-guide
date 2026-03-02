@@ -19,8 +19,24 @@ import {
 } from "@/components/ui/table";
 import Header from "@/components/Header";
 import { supabase } from "@/integrations/supabase/client";
-import { Download, LogIn, KeyRound } from "lucide-react";
+import { Download, LogIn, KeyRound, FileDown } from "lucide-react";
 import { toast } from "sonner";
+import { generateResultsPDF } from "@/lib/generate-results-pdf";
+import { getBand, getRecommendations, CATEGORIES, QUESTIONS } from "@/lib/scorecard-config";
+import type { AssessmentResult, LeadData } from "@/context/AppContext";
+
+interface AssessmentRow {
+  total_score: number | null;
+  band: string | null;
+  q1: number | null; q2: number | null; q3: number | null;
+  q4: number | null; q5: number | null; q6: number | null;
+  q7: number | null; q8: number | null; q9: number | null;
+  q10: number | null; q11: number | null; q12: number | null;
+  category_data_readiness: number | null;
+  category_workflow_execution: number | null;
+  category_governance: number | null;
+  category_adoption_roi: number | null;
+}
 
 interface LeadRow {
   id: string;
@@ -31,10 +47,7 @@ interface LeadRow {
   agent_count: string | null;
   top_priority: string | null;
   created_at: string;
-  assessments: {
-    total_score: number | null;
-    band: string | null;
-  }[];
+  assessments: AssessmentRow[];
 }
 
 export default function Admin() {
@@ -103,7 +116,7 @@ export default function Admin() {
   const fetchLeads = async () => {
     const { data, error } = await supabase
       .from("leads")
-      .select("*, assessments(total_score, band)")
+      .select("*, assessments(total_score, band, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, category_data_readiness, category_workflow_execution, category_governance, category_adoption_roi)")
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -139,6 +152,56 @@ export default function Admin() {
     a.download = `leads-export-${new Date().toISOString().split("T")[0]}.csv`;
     a.click();
     URL.revokeObjectURL(url);
+  };
+
+  const handleDownloadPDF = async (lead: LeadRow) => {
+    const a = lead.assessments?.[0];
+    if (!a || a.total_score == null || !a.band) {
+      toast.error("No assessment data available for this lead.");
+      return;
+    }
+
+    const answers: Record<number, number> = {};
+    for (let i = 1; i <= 12; i++) {
+      const val = (a as any)[`q${i}`];
+      if (val != null) answers[i] = val;
+    }
+
+    const categoryScores: Record<string, number> = {
+      "Data Readiness": a.category_data_readiness ?? 0,
+      "Workflow Execution": a.category_workflow_execution ?? 0,
+      "Governance": a.category_governance ?? 0,
+      "Adoption & ROI": a.category_adoption_roi ?? 0,
+    };
+
+    const recommendations = getRecommendations(categoryScores);
+
+    const assessmentResult: AssessmentResult = {
+      answers,
+      totalScore: a.total_score,
+      band: a.band as any,
+      categoryScores,
+      recommendations,
+    };
+
+    const leadData: LeadData = {
+      id: lead.id,
+      firstName: lead.first_name || "",
+      lastName: lead.last_name || "",
+      email: lead.email,
+      brokerageName: lead.brokerage_name || "",
+      agentCount: lead.agent_count || "",
+      topPriority: lead.top_priority || "",
+      consent: true,
+    };
+
+    try {
+      await generateResultsPDF(assessmentResult, leadData);
+      toast.success("PDF downloaded");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to generate PDF");
+    }
   };
 
   const handleChangePassword = async (e: React.FormEvent) => {
@@ -302,12 +365,13 @@ export default function Admin() {
                   <TableHead className="text-xs font-semibold uppercase tracking-wide">Score</TableHead>
                   <TableHead className="text-xs font-semibold uppercase tracking-wide">Band</TableHead>
                   <TableHead className="text-xs font-semibold uppercase tracking-wide">Date</TableHead>
+                  <TableHead className="text-xs font-semibold uppercase tracking-wide w-16">PDF</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredLeads.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={8} className="text-center text-muted-foreground py-12 text-sm">
+                    <TableCell colSpan={9} className="text-center text-muted-foreground py-12 text-sm">
                       No leads recorded yet.
                     </TableCell>
                   </TableRow>
@@ -332,6 +396,13 @@ export default function Admin() {
                         ) : "—"}
                       </TableCell>
                       <TableCell className="text-sm text-muted-foreground">{new Date(l.created_at).toLocaleDateString()}</TableCell>
+                      <TableCell>
+                        {l.assessments?.[0]?.total_score != null ? (
+                          <Button variant="ghost" size="sm" onClick={() => handleDownloadPDF(l)} className="h-8 w-8 p-0">
+                            <FileDown className="h-4 w-4" />
+                          </Button>
+                        ) : "—"}
+                      </TableCell>
                     </TableRow>
                   ))
                 )}
