@@ -242,7 +242,7 @@ export default function Admin() {
             <h1 className="text-display-sm text-foreground">Lead Management</h1>
             <p className="text-sm text-muted-foreground mt-1">{filteredLeads.length} leads total</p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-wrap">
             <Select value={bandFilter} onValueChange={setBandFilter}>
               <SelectTrigger className="w-52">
                 <SelectValue placeholder="Filter by maturity band" />
@@ -257,6 +257,10 @@ export default function Admin() {
             <Button variant="outline" onClick={exportCSV}>
               <Download className="h-4 w-4 mr-2" />
               Export CSV
+            </Button>
+            <Button variant="outline" onClick={() => setShowPasswordForm(!showPasswordForm)}>
+              <KeyRound className="h-4 w-4 mr-2" />
+              Change Password
             </Button>
           </div>
         </div>
