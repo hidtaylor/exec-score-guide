@@ -149,7 +149,9 @@ export default function Scorecard() {
                   <span>{q.question}</span>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <HelpCircle className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5 cursor-help" />
+                      <button type="button" className="shrink-0 mt-0.5" aria-label="More info">
+                        <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                      </button>
                     </TooltipTrigger>
                     <TooltipContent side="top" className="max-w-xs text-sm">
                       {q.tooltip}
