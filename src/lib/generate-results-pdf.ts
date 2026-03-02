@@ -9,6 +9,27 @@ function setColor(doc: jsPDF, r: number, g: number, b: number) {
   doc.setTextColor(r, g, b);
 }
 
+/**
+ * Pre-load an image and return its base64 data URL.
+ */
+function loadImageAsDataUrl(src: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return reject(new Error("no canvas ctx"));
+      ctx.drawImage(img, 0, 0);
+      resolve(canvas.toDataURL("image/jpeg"));
+    };
+    img.onerror = () => reject(new Error("image load failed"));
+    img.src = src;
+  });
+}
+
 export async function generateResultsPDF(assessment: AssessmentResult, lead: LeadData | null) {
   const doc = new jsPDF({ unit: "pt", format: "letter" });
   const pageW = doc.internal.pageSize.getWidth();
@@ -46,17 +67,24 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
   doc.setFontSize(42);
   setColor(doc, 35, 40, 50);
   doc.text(`${assessment.totalScore}`, margin, y);
+
+  // Place "/60" right after the score on the same baseline
+  const scoreTextW = doc.getTextWidth(`${assessment.totalScore}`);
   doc.setFontSize(14);
   setColor(doc, 100, 105, 115);
-  doc.text("/60", margin + doc.getTextWidth(`${assessment.totalScore}`) + 4, y);
-  y += 32;
+  doc.text("/60", margin + scoreTextW + 4, y);
 
+  // Move down well past the large score text
+  y += 40;
+
+  // Band label
   doc.setFontSize(12);
   doc.setFont("helvetica", "bold");
   setColor(doc, 55, 100, 115);
   doc.text(assessment.band.toUpperCase(), margin, y);
   y += 18;
 
+  // Band description
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
   setColor(doc, 100, 105, 115);
@@ -179,26 +207,11 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
 
   // Add QR code image
   try {
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    await new Promise<void>((resolve, reject) => {
-      img.onload = () => resolve();
-      img.onerror = reject;
-      img.src = calendlyQrImg;
-    });
-
-    const canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    const ctx = canvas.getContext("2d");
-    if (ctx) {
-      ctx.drawImage(img, 0, 0);
-      const dataUrl = canvas.toDataURL("image/jpeg");
-      doc.addImage(dataUrl, "JPEG", qrX, footerStartY, qrSize, qrSize);
-      doc.setFontSize(7);
-      setColor(doc, 130, 130, 130);
-      doc.text("Scan to schedule", qrX + qrSize / 2, footerStartY + qrSize + 10, { align: "center" });
-    }
+    const qrDataUrl = await loadImageAsDataUrl(calendlyQrImg);
+    doc.addImage(qrDataUrl, "JPEG", qrX, footerStartY, qrSize, qrSize);
+    doc.setFontSize(7);
+    setColor(doc, 130, 130, 130);
+    doc.text("Scan to schedule", qrX + qrSize / 2, footerStartY + qrSize + 10, { align: "center" });
   } catch {
     // QR image failed to load — skip silently
   }
