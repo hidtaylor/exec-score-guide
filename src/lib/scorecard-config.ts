@@ -18,7 +18,7 @@ export const QUESTIONS: ScorecardQuestion[] = [
   {
     id: 1,
     category: "Data Readiness",
-    question: "How centralized and accessible is your brokerage's transaction, client, and agent data?",
+    question: "How centralized and accessible is your brokerage's transaction, client and agent data?",
     tooltip: "Can your team easily find all client, deal, and agent info in one place — or is it spread across spreadsheets, email, and different apps?",
     labels: ["Scattered across systems", "Fully centralized and accessible"],
   },
