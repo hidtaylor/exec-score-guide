@@ -90,6 +90,29 @@ export default function Scorecard() {
           recommendations: recommendations as any,
         });
         if (error) throw error;
+
+        // Fire webhook to Zapier (fire-and-forget)
+        supabase.functions.invoke('zapier-webhook', {
+          body: {
+            firstName: lead.firstName,
+            lastName: lead.lastName,
+            email: lead.email,
+            brokerageName: lead.brokerageName,
+            agentCount: lead.agentCount,
+            topPriority: lead.topPriority,
+            q1: answers[1], q2: answers[2], q3: answers[3],
+            q4: answers[4], q5: answers[5], q6: answers[6],
+            q7: answers[7], q8: answers[8], q9: answers[9],
+            q10: answers[10], q11: answers[11], q12: answers[12],
+            totalScore,
+            band,
+            categoryScores,
+            recommendations,
+          },
+        }).then(({ error: fnErr }) => {
+          if (fnErr) console.error("Zapier webhook error:", fnErr);
+          else console.log("Zapier webhook sent successfully");
+        });
       } catch (err) {
         console.error(err);
         toast.error("Could not save results, but we'll show them now.");
