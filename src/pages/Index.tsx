@@ -88,7 +88,7 @@ export default function Index() {
       {/* Footer */}
       <footer className="border-t border-border py-10">
         <div className="container text-center text-xs text-muted-foreground tracking-wide">
-          © {new Date().getFullYear()} Brokerage AI Advisory. All rights reserved.
+          © {new Date().getFullYear()} T3 Sixty. All rights reserved.
         </div>
       </footer>
     </div>);
