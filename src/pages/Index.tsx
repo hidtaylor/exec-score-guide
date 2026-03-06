@@ -4,11 +4,11 @@ import Header from "@/components/Header";
 import LeadCaptureForm from "@/components/LeadCaptureForm";
 
 const DELIVERS = [
-  "A structured AI maturity assessment across four operational dimensions",
-  "Rules-based priority recommendations tailored to your brokerage profile",
-  "A phased 90-day implementation roadmap with measurable milestones",
-  "Baseline KPI targets to track return on AI investment",
-];
+"A structured AI maturity assessment across four operational dimensions",
+"Rules-based priority recommendations tailored to your brokerage profile",
+"A phased 90-day implementation roadmap with measurable milestones",
+"Baseline KPI targets to track return on AI investment"];
+
 
 export default function Index() {
   return (
@@ -20,9 +20,9 @@ export default function Index() {
         <div className="container py-20 md:py-28">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             <div className="space-y-6 animate-fade-in max-w-lg">
-              <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
-                AI Transformation Advisory
-              </p>
+              
+
+              
               <h1 className="text-display-lg text-foreground">
                 Assess Your Brokerage's AI Readiness
               </h1>
@@ -57,16 +57,16 @@ export default function Index() {
             A Complete AI Readiness Framework
           </h2>
           <div className="space-y-5">
-            {DELIVERS.map((item, i) => (
-              <div
-                key={i}
-                className="flex gap-4 items-start animate-fade-in"
-                style={{ animationDelay: `${i * 0.08}s` }}
-              >
+            {DELIVERS.map((item, i) =>
+            <div
+              key={i}
+              className="flex gap-4 items-start animate-fade-in"
+              style={{ animationDelay: `${i * 0.08}s` }}>
+              
                 <span className="text-accent font-semibold text-sm mt-0.5 shrink-0">{String(i + 1).padStart(2, "0")}</span>
                 <p className="text-foreground leading-relaxed">{item}</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -91,6 +91,6 @@ export default function Index() {
           © {new Date().getFullYear()} Brokerage AI Advisory. All rights reserved.
         </div>
       </footer>
-    </div>
-  );
+    </div>);
+
 }
