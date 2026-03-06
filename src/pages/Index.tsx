@@ -27,7 +27,7 @@ export default function Index() {
                 Assess Your Brokerage's AI Readiness
               </h1>
               <p className="text-base text-muted-foreground leading-relaxed">
-                Identify gaps, prioritize initiatives, and build a 90-day action plan — in under 15 minutes.
+                Identify gaps, prioritize initiatives and build a 90-day action plan — in under 15 minutes.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 pt-4">
                 <Button variant="hero" asChild>
@@ -77,7 +77,7 @@ export default function Index() {
         <div className="container py-20 md:py-24 text-center max-w-2xl">
           <h2 className="text-display-md mb-5">Built for Brokerage Executives</h2>
           <p className="text-primary-foreground/75 text-base leading-relaxed">
-            Designed around measurable ROI, operational leverage, and governance — not hype. A structured framework for leaders who need clarity on their path to AI transformation.
+            Designed around measurable ROI, operational leverage and governance — not hype. A structured framework for leaders who need clarity on their path to AI transformation.
           </p>
           <Button variant="hero-outline" className="mt-10 border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground hover:text-primary" asChild>
             <a href="#get-started">Begin Assessment</a>

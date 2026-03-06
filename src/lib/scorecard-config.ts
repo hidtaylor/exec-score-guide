@@ -19,7 +19,7 @@ export const QUESTIONS: ScorecardQuestion[] = [
     id: 1,
     category: "Data Readiness",
     question: "How centralized and accessible is your brokerage's transaction, client and agent data?",
-    tooltip: "Can your team easily find all client, deal, and agent info in one place — or is it spread across spreadsheets, email, and different apps?",
+    tooltip: "Can your team easily find all client, deal and agent info in one place — or is it spread across spreadsheets, email and different apps?",
     labels: ["Scattered across systems", "Fully centralized and accessible"],
   },
   {
@@ -27,7 +27,7 @@ export const QUESTIONS: ScorecardQuestion[] = [
     category: "Data Readiness",
     question: "How clean and standardized is your data for AI/ML consumption?",
     tooltip: "Is your data organized and labeled well enough that a computer could read and learn from it without a lot of cleanup first?",
-    labels: ["Inconsistent and messy", "Clean, tagged, and ML-ready"],
+    labels: ["Inconsistent and messy", "Clean, tagged and ML-ready"],
   },
   {
     id: 3,
@@ -155,7 +155,7 @@ export function getRecommendations(categoryScores: Record<string, number>): Reco
       case "Data Readiness":
         recommendations.push({
           title: "Centralize and Clean Your Data",
-          description: "Audit all data sources, establish a single source of truth, and implement data quality standards. This is the foundation for every AI initiative.",
+          description: "Audit all data sources, establish a single source of truth and implement data quality standards. This is the foundation for every AI initiative.",
           category,
         });
         break;
@@ -169,7 +169,7 @@ export function getRecommendations(categoryScores: Record<string, number>): Reco
       case "Governance":
         recommendations.push({
           title: "Establish AI Governance Framework",
-          description: "Draft an AI usage policy, assign an executive sponsor, and create a review process for AI-generated outputs before they reach clients.",
+          description: "Draft an AI usage policy, assign an executive sponsor and create a review process for AI-generated outputs before they reach clients.",
           category,
         });
         break;
