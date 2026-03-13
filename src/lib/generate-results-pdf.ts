@@ -1,7 +1,7 @@
 import jsPDF from "jspdf";
 import type { AssessmentResult, LeadData } from "@/context/AppContext";
 import calendlyQrImg from "@/assets/calendly-qr.jpg";
-import t360Logo from "@/assets/t360-logo.webp";
+import t360Logo from "@/assets/T360_DisplayLogo_Black.png";
 import { getBandDescription, QUICKSTART_TIMELINE, CATEGORIES } from "@/lib/scorecard-config";
 
 const CALENDLY_URL = "https://calendly.com/derek-taylor-2/t3-sixty-brokerage-ai-readiness-consultation";
