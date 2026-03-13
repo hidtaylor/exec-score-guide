@@ -2,6 +2,22 @@
 
 @font-face {
   font-family: 'Theinhardt';
+  src: url('/fonts/Theinhardt-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Theinhardt';
+  src: url('/fonts/Theinhardt-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Theinhardt';
   src: url('/fonts/Theinhardt-Black.ttf') format('truetype');
   font-weight: 900;
   font-style: normal;

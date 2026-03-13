@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ["Theinhardt", "Inter", "system-ui", "sans-serif"],
         display: ["Theinhardt", "Inter", "system-ui", "sans-serif"],
       },
       fontSize: {
