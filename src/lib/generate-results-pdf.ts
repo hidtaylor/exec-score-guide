@@ -69,7 +69,7 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
   // --- Lead info ---
   if (lead) {
     doc.setFontSize(10);
-    setColor(doc, 100, 105, 115);
+    setColor(doc, 113, 142, 177);
     doc.text(`Prepared for: ${lead.firstName} ${lead.lastName}`, margin, y);
     doc.text(`Brokerage: ${lead.brokerageName}`, margin, y + 14);
     doc.text(`Date: ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`, margin, y + 28);
@@ -81,13 +81,13 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
   // --- Overall Score ---
   doc.setFont("helvetica", "bold");
   doc.setFontSize(42);
-  setColor(doc, 35, 40, 50);
+  setColor(doc, 36, 54, 85);
   doc.text(`${assessment.totalScore}`, margin, y);
 
   // Place "/60" right after the score on the same baseline
   const scoreTextW = doc.getTextWidth(`${assessment.totalScore}`);
   doc.setFontSize(14);
-  setColor(doc, 100, 105, 115);
+  setColor(doc, 113, 142, 177);
   doc.text("/60", margin + scoreTextW + 4, y);
 
   // Move down well past the large score text
@@ -96,14 +96,14 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
   // Band label
   doc.setFontSize(12);
   doc.setFont("helvetica", "bold");
-  setColor(doc, 55, 100, 115);
+  setColor(doc, 0, 80, 163);
   doc.text(assessment.band.toUpperCase(), margin, y);
   y += 18;
 
   // Band description
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
-  setColor(doc, 100, 105, 115);
+  setColor(doc, 113, 142, 177);
   const bandDesc = getBandDescription(assessment.band);
   const bandLines = doc.splitTextToSize(bandDesc, contentW);
   doc.text(bandLines, margin, y);
@@ -112,7 +112,7 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
   // --- Category Scores ---
   doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
-  setColor(doc, 35, 40, 50);
+  setColor(doc, 36, 54, 85);
   doc.text("CATEGORY SCORES", margin, y);
   y += 18;
 
@@ -122,11 +122,11 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
     const x = margin + i * catW;
     doc.setFont("helvetica", "bold");
     doc.setFontSize(18);
-    setColor(doc, 35, 40, 50);
+    setColor(doc, 36, 54, 85);
     doc.text(score.toFixed(1), x + catW / 2, y, { align: "center" });
     doc.setFont("helvetica", "normal");
     doc.setFontSize(7);
-    setColor(doc, 100, 105, 115);
+    setColor(doc, 113, 142, 177);
     doc.text(cat, x + catW / 2, y + 14, { align: "center" });
   });
   y += 40;
