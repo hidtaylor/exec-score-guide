@@ -39,25 +39,25 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
   let y = margin;
 
   // --- Header with logo ---
+  // Brand colors: Dark Blue RGB(36,54,85), Medium Blue RGB(0,80,163), Grey RGB(113,142,177)
   try {
     const logoDataUrl = await loadImageAsDataUrl(t360Logo);
     const logoH = 36;
     const logoW = 36;
-    doc.addImage(logoDataUrl, "JPEG", margin, y - logoH + 8, logoW, logoH);
+    doc.addImage(logoDataUrl, "PNG", margin, y - logoH + 8, logoW, logoH);
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
-    setColor(doc, 100, 105, 115);
+    setColor(doc, 113, 142, 177);
     doc.text("AI Readiness Assessment Results", margin + logoW + 10, y);
     y += 50;
   } catch {
-    // Fallback to text if logo fails
     doc.setFont("helvetica", "bold");
     doc.setFontSize(22);
-    setColor(doc, 35, 40, 50);
+    setColor(doc, 36, 54, 85);
     doc.text("T3 Sixty", margin, y);
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
-    setColor(doc, 100, 105, 115);
+    setColor(doc, 113, 142, 177);
     doc.text("AI Readiness Assessment Results", margin, y + 18);
     y += 50;
   }
