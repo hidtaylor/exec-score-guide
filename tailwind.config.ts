@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Lora", "Georgia", "serif"],
+        display: ["Theinhardt", "Inter", "system-ui", "sans-serif"],
       },
       fontSize: {
         "display-lg": ["2.75rem", { lineHeight: "1.15", letterSpacing: "-0.02em" }],
