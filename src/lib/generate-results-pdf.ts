@@ -137,7 +137,7 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
   // --- Recommendations ---
   doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
-  setColor(doc, 35, 40, 50);
+  setColor(doc, 36, 54, 85);
   doc.text("TOP 3 PRIORITIES", margin, y);
   y += 18;
 
@@ -145,14 +145,14 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
     if (y > 660) { doc.addPage(); y = margin; }
     doc.setFont("helvetica", "bold");
     doc.setFontSize(10);
-    setColor(doc, 55, 100, 115);
+    setColor(doc, 0, 80, 163);
     doc.text(`${String(i + 1).padStart(2, "0")}`, margin, y);
-    setColor(doc, 35, 40, 50);
+    setColor(doc, 36, 54, 85);
     doc.text(rec.title, margin + 24, y);
     y += 14;
     doc.setFont("helvetica", "normal");
     doc.setFontSize(9);
-    setColor(doc, 100, 105, 115);
+    setColor(doc, 113, 142, 177);
     const lines = doc.splitTextToSize(rec.description, contentW - 24);
     doc.text(lines, margin + 24, y);
     y += lines.length * 12 + 12;
@@ -165,7 +165,7 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
-  setColor(doc, 35, 40, 50);
+  setColor(doc, 36, 54, 85);
   doc.text("90-DAY ACTION PLAN", margin, y);
   y += 20;
 
@@ -173,9 +173,9 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
     if (y > 620) { doc.addPage(); y = margin; }
     doc.setFont("helvetica", "bold");
     doc.setFontSize(9);
-    setColor(doc, 55, 100, 115);
+    setColor(doc, 0, 80, 163);
     doc.text(phase.phase.toUpperCase(), margin, y);
-    setColor(doc, 35, 40, 50);
+    setColor(doc, 36, 54, 85);
     doc.setFontSize(10);
     doc.text(phase.title, margin + 70, y);
     y += 14;
@@ -184,7 +184,7 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
       if (y > 700) { doc.addPage(); y = margin; }
       doc.setFont("helvetica", "normal");
       doc.setFontSize(8);
-      setColor(doc, 100, 105, 115);
+      setColor(doc, 113, 142, 177);
       const lines = doc.splitTextToSize(`—  ${action}`, contentW - 70);
       doc.text(lines, margin + 70, y);
       y += lines.length * 11;
@@ -204,12 +204,12 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(10);
-  setColor(doc, 35, 40, 50);
+  setColor(doc, 36, 54, 85);
   doc.text("Ready to accelerate your AI transformation?", textX, y);
   y += 16;
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
-  setColor(doc, 100, 105, 115);
+  setColor(doc, 113, 142, 177);
   doc.text("Derek Taylor", textX, y);
   y += 12;
   doc.text("VP of Technology Consulting and AI Transformation", textX, y);
@@ -226,7 +226,7 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
     const qrDataUrl = await loadImageAsDataUrl(calendlyQrImg);
     doc.addImage(qrDataUrl, "JPEG", qrX, footerStartY, qrSize, qrSize);
     doc.setFontSize(7);
-    setColor(doc, 130, 130, 130);
+    setColor(doc, 113, 142, 177);
     doc.text("Scan to schedule", qrX + qrSize / 2, footerStartY + qrSize + 10, { align: "center" });
   } catch {
     // QR image failed to load — skip silently
