@@ -24,7 +24,7 @@ function loadImageAsDataUrl(src: string): Promise<string> {
       const ctx = canvas.getContext("2d");
       if (!ctx) return reject(new Error("no canvas ctx"));
       ctx.drawImage(img, 0, 0);
-      resolve(canvas.toDataURL("image/jpeg"));
+      resolve(canvas.toDataURL("image/png"));
     };
     img.onerror = () => reject(new Error("image load failed"));
     img.src = src;
