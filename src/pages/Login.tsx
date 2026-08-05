@@ -39,7 +39,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-soft">
       <Header />
       <main className="container max-w-sm py-20">
         <h1 className="text-display-sm text-foreground mb-6">Sign in</h1>

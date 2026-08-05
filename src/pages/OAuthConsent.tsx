@@ -74,7 +74,7 @@ export default function OAuthConsent() {
   const clientName = details?.client?.name ?? "an application";
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-soft">
       <Header />
       <main className="container max-w-md py-20">
         {error ? (
