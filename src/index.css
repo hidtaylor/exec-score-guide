@@ -128,7 +128,21 @@
     --sidebar-accent-foreground: 218 10% 90%;
     --sidebar-border: 218 30% 18%;
     --sidebar-ring: 211 100% 40%;
+
+    --brand-light: 196 100% 46%;
+    --brand-light-foreground: 218 41% 10%;
+    --brand-grey: 74 4% 45%;
+
+    --gradient-hero: linear-gradient(160deg, hsl(var(--brand-light) / 0.14) 0%, hsl(var(--accent) / 0.08) 45%, hsl(var(--background)) 100%);
+    --gradient-soft: linear-gradient(180deg, hsl(var(--brand-light) / 0.08) 0%, hsl(var(--background)) 100%);
+    --gradient-cta: linear-gradient(100deg, hsl(var(--accent)) 0%, hsl(var(--brand-light)) 100%);
+    --gradient-deep: linear-gradient(135deg, hsl(218 41% 14%) 0%, hsl(var(--accent)) 100%);
+    --gradient-text: linear-gradient(100deg, hsl(var(--brand-light)) 0%, hsl(196 100% 70%) 100%);
+
+    --shadow-brand: 0 10px 30px -12px hsl(var(--accent) / 0.6);
+    --shadow-card: 0 20px 50px -24px hsl(0 0% 0% / 0.6);
   }
+
 }
 
 @layer base {
