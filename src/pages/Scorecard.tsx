@@ -6,6 +6,7 @@ import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/comp
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { HelpCircle } from "lucide-react";
 import Header from "@/components/Header";
+import Seo from "@/components/Seo";
 import { useAppContext } from "@/context/AppContext";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
@@ -127,7 +128,8 @@ export default function Scorecard() {
   return (
     <TooltipProvider delayDuration={300}>
       <div className="min-h-screen bg-gradient-soft">
-        <Header />
+        <Seo title={"T3 Anchor Assessment | AI Readiness Scorecard"} description={"Answer 12 questions across four dimensions to score your brokerage's AI readiness and unlock a phased 90-day action plan."} path="/scorecard" />
+      <Header />
         <div className="container max-w-2xl py-12 md:py-20">
           {/* Progress */}
           <div className="mb-10 space-y-3">
@@ -164,7 +166,9 @@ export default function Scorecard() {
             <p className="text-xs font-semibold tracking-widest uppercase text-accent mb-1">
               Section {currentCategory + 1} of {CATEGORIES.length}
             </p>
-            <h2 className="text-display-sm text-foreground">{CATEGORIES[currentCategory]}</h2>
+            <h1 className="text-display-sm text-foreground">
+              T3 Anchor Assessment: {CATEGORIES[currentCategory]}
+            </h1>
           </div>
 
           {/* Questions */}

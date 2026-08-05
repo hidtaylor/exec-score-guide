@@ -127,9 +127,9 @@ export default function LeadCaptureForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <Label className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Agent Count</Label>
+          <Label htmlFor="agentCount" className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Agent Count</Label>
           <Select value={form.agentCount} onValueChange={(v) => setForm({ ...form, agentCount: v })}>
-            <SelectTrigger>
+            <SelectTrigger id="agentCount" aria-label="Agent Count">
               <SelectValue placeholder="Select range" />
             </SelectTrigger>
             <SelectContent>
@@ -140,9 +140,9 @@ export default function LeadCaptureForm() {
           </Select>
         </div>
         <div className="space-y-1.5">
-          <Label className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Top Priority</Label>
+          <Label htmlFor="topPriority" className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Top Priority</Label>
           <Select value={form.topPriority} onValueChange={(v) => setForm({ ...form, topPriority: v })}>
-            <SelectTrigger>
+            <SelectTrigger id="topPriority" aria-label="Top Priority">
               <SelectValue placeholder="Select priority" />
             </SelectTrigger>
             <SelectContent>

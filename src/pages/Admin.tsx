@@ -18,6 +18,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Header from "@/components/Header";
+import Seo from "@/components/Seo";
 import { supabase } from "@/integrations/supabase/client";
 import { Download, LogIn, KeyRound, FileDown } from "lucide-react";
 import { toast } from "sonner";
@@ -255,7 +256,8 @@ export default function Admin() {
   if (!sessionChecked) {
     return (
       <div className="min-h-screen bg-gradient-soft">
-        <Header />
+        <Seo title={"Lead Management | T3 Anchor"} description={"Internal T3 Anchor lead management dashboard."} path="/admin" noindex />
+      <Header />
         <div className="container py-24 text-center text-muted-foreground">Loading…</div>
       </div>
     );
@@ -264,6 +266,7 @@ export default function Admin() {
   if (!authed) {
     return (
       <div className="min-h-screen bg-gradient-soft">
+      <Seo title={"Lead Management | T3 Anchor"} description={"Internal T3 Anchor lead management dashboard."} path="/admin" noindex />
         <Header />
         <div className="container max-w-sm py-24">
           <div className="border border-border rounded p-8 space-y-6">
@@ -308,6 +311,7 @@ export default function Admin() {
   if (!isAdmin) {
     return (
       <div className="min-h-screen bg-gradient-soft">
+      <Seo title={"Lead Management | T3 Anchor"} description={"Internal T3 Anchor lead management dashboard."} path="/admin" noindex />
         <Header />
         <div className="container max-w-sm py-24 text-center space-y-4">
           <h1 className="text-display-sm text-foreground">Access Denied</h1>
@@ -322,6 +326,7 @@ export default function Admin() {
 
   return (
     <div className="min-h-screen bg-gradient-soft">
+      <Seo title={"Lead Management | T3 Anchor"} description={"Internal T3 Anchor lead management dashboard."} path="/admin" noindex />
       <Header />
       <div className="container py-10">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
