@@ -137,8 +137,7 @@ export default function Results() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-2">
                 <Button
-                  variant="hero-outline"
-                  className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                  variant="hero-yellow"
                   asChild
                 >
                   <Link to="/thanks">
@@ -173,7 +172,7 @@ export default function Results() {
         </div>
       </div>
 
-      <footer className="border-t border-border py-10">
+      <footer className="border-t-2 border-accent/30 py-10">
         <div className="container text-center text-xs text-muted-foreground tracking-wide">
           © {new Date().getFullYear()} T3 Sixty. All rights reserved.
         </div>
