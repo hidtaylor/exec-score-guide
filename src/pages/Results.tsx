@@ -28,7 +28,7 @@ export default function Results() {
         <div className="text-center space-y-5 animate-fade-in">
           <p className="inline-flex items-center gap-2 rounded-full border border-warning/40 bg-warning/15 px-3 py-1 text-xs font-semibold tracking-widest uppercase text-primary">
             <span className="h-1.5 w-1.5 rounded-full bg-warning" />
-            AI Maturity Assessment Results
+            T3 Anchor Results
           </p>
           <div className={`text-6xl md:text-7xl font-display font-semibold ${scoreColor}`}>
             {totalScore}<span className="text-xl text-muted-foreground font-sans font-normal">/60</span>
@@ -128,7 +128,7 @@ export default function Results() {
               <div className="space-y-1">
                 <p className="font-semibold text-sm">Derek Taylor</p>
                 <p className="text-primary-foreground/70 text-sm">
-                  VP of Technology Consulting and AI Transformation
+                  SVP T3 Technology Consulting
                 </p>
                 <p className="text-primary-foreground/70 text-sm">T3 Sixty</p>
               </div>

@@ -132,7 +132,7 @@ export default function Scorecard() {
           {/* Progress */}
           <div className="mb-10 space-y-3">
             <div className="flex items-center justify-between text-xs uppercase tracking-wide">
-              <span className="font-semibold text-accent">AI Maturity Assessment</span>
+              <span className="font-semibold text-accent">T3 Anchor</span>
               <span className="text-muted-foreground">{answeredCount} of {QUESTIONS.length} complete</span>
             </div>
             <Progress value={progress} className="h-1.5 [&>div]:bg-gradient-cta" />
