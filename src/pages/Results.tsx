@@ -1,6 +1,7 @@
 import { Link, Navigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
+import Seo from "@/components/Seo";
 import { useAppContext } from "@/context/AppContext";
 import { getBandDescription, QUICKSTART_TIMELINE, CATEGORIES } from "@/lib/scorecard-config";
 import { generateResultsPDF } from "@/lib/generate-results-pdf";
@@ -30,6 +31,7 @@ export default function Results() {
             <span className="h-1.5 w-1.5 rounded-full bg-warning" />
             T3 Anchor Results
           </p>
+          <h1 className="sr-only">Your T3 Anchor AI readiness results</h1>
           <div className={`text-6xl md:text-7xl font-display font-semibold ${scoreColor}`}>
             {totalScore}<span className="text-xl text-muted-foreground font-sans font-normal">/60</span>
           </div>

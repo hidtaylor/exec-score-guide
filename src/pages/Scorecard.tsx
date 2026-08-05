@@ -6,6 +6,7 @@ import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/comp
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { HelpCircle } from "lucide-react";
 import Header from "@/components/Header";
+import Seo from "@/components/Seo";
 import { useAppContext } from "@/context/AppContext";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
@@ -164,7 +165,9 @@ export default function Scorecard() {
             <p className="text-xs font-semibold tracking-widest uppercase text-accent mb-1">
               Section {currentCategory + 1} of {CATEGORIES.length}
             </p>
-            <h2 className="text-display-sm text-foreground">{CATEGORIES[currentCategory]}</h2>
+            <h1 className="text-display-sm text-foreground">
+              T3 Anchor Assessment: {CATEGORIES[currentCategory]}
+            </h1>
           </div>
 
           {/* Questions */}
