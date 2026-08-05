@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import LeadCaptureForm from "@/components/LeadCaptureForm";
-import derekPhoto from "@/assets/derek-taylor.jpg.asset.json";
+import derekPhoto from "@/assets/derek-taylor.png.asset.json";
 
 const DELIVERS = [
 "A structured AI maturity assessment across four operational dimensions",
