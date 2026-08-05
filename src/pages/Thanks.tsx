@@ -8,6 +8,7 @@ const CALENDLY_URL = "https://calendly.com/derek-taylor-2/t3-sixty-brokerage-ai-
 export default function Thanks() {
   return (
     <div className="min-h-screen bg-gradient-soft">
+      <Seo title={"Book Your Strategy Review | T3 Anchor"} description={"Schedule a complimentary 30 minute consultation to review your T3 Anchor assessment results and next steps."} path="/thanks" noindex />
       <Header />
       <div className="container max-w-2xl py-12 md:py-20 space-y-12">
         <div className="text-center space-y-4 animate-fade-in">

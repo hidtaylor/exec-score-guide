@@ -23,6 +23,7 @@ export default function Results() {
 
   return (
     <div className="min-h-screen bg-gradient-soft">
+      <Seo title={"Your Results | T3 Anchor AI Readiness"} description={"Review your T3 Anchor score, category breakdown, top three priorities and 90-day action plan for brokerage AI adoption."} path="/results" noindex />
       <Header />
       <div className="container max-w-3xl py-12 md:py-20 space-y-16">
         {/* Score Overview */}

@@ -18,6 +18,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Header from "@/components/Header";
+import Seo from "@/components/Seo";
 import { supabase } from "@/integrations/supabase/client";
 import { Download, LogIn, KeyRound, FileDown } from "lucide-react";
 import { toast } from "sonner";
@@ -255,7 +256,8 @@ export default function Admin() {
   if (!sessionChecked) {
     return (
       <div className="min-h-screen bg-gradient-soft">
-        <Header />
+        <Seo title={"Lead Management | T3 Anchor"} description={"Internal T3 Anchor lead management dashboard."} path="/admin" noindex />
+      <Header />
         <div className="container py-24 text-center text-muted-foreground">Loading…</div>
       </div>
     );

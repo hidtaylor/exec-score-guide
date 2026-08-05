@@ -128,7 +128,8 @@ export default function Scorecard() {
   return (
     <TooltipProvider delayDuration={300}>
       <div className="min-h-screen bg-gradient-soft">
-        <Header />
+        <Seo title={"T3 Anchor Assessment | AI Readiness Scorecard"} description={"Answer 12 questions across four dimensions to score your brokerage's AI readiness and unlock a phased 90-day action plan."} path="/scorecard" />
+      <Header />
         <div className="container max-w-2xl py-12 md:py-20">
           {/* Progress */}
           <div className="mb-10 space-y-3">
