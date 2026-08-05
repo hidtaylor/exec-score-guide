@@ -83,6 +83,23 @@ export default {
           mid: "hsl(var(--score-mid))",
           low: "hsl(var(--score-low))",
         },
+        brand: {
+          light: "hsl(var(--brand-light))",
+          "light-foreground": "hsl(var(--brand-light-foreground))",
+          grey: "hsl(var(--brand-grey))",
+        },
+      },
+      backgroundImage: {
+        "gradient-hero": "var(--gradient-hero)",
+        "gradient-soft": "var(--gradient-soft)",
+        "gradient-cta": "var(--gradient-cta)",
+        "gradient-deep": "var(--gradient-deep)",
+        "gradient-text": "var(--gradient-text)",
+      },
+      boxShadow: {
+        brand: "var(--shadow-brand)",
+        card: "var(--shadow-card)",
+
       },
       borderRadius: {
         lg: "var(--radius)",
