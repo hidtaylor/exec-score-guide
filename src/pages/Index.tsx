@@ -122,11 +122,12 @@ export default function Index() {
 
 
       {/* Footer */}
-      <footer className="border-t border-border py-10">
+      <footer className="border-t-2 border-accent/30 py-10">
         <div className="container text-center text-xs text-muted-foreground tracking-wide">
           © {new Date().getFullYear()} T3 Sixty. All rights reserved.
         </div>
       </footer>
+
     </div>);
 
 }
