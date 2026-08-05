@@ -21,18 +21,19 @@ export default function Results() {
     totalScore >= 30 ? "text-score-mid" : "text-score-low";
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-soft">
       <Header />
       <div className="container max-w-3xl py-12 md:py-20 space-y-16">
         {/* Score Overview */}
         <div className="text-center space-y-5 animate-fade-in">
-          <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
+          <p className="inline-flex items-center gap-2 rounded-full border border-warning/40 bg-warning/15 px-3 py-1 text-xs font-semibold tracking-widest uppercase text-primary">
+            <span className="h-1.5 w-1.5 rounded-full bg-warning" />
             AI Maturity Assessment Results
           </p>
           <div className={`text-6xl md:text-7xl font-display font-semibold ${scoreColor}`}>
             {totalScore}<span className="text-xl text-muted-foreground font-sans font-normal">/60</span>
           </div>
-          <div className="inline-block border border-border px-4 py-1.5 rounded text-xs font-semibold uppercase tracking-wide text-foreground">
+          <div className="inline-block border border-accent/30 bg-accent/10 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide text-accent">
             {band}
           </div>
           <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed text-sm">
@@ -42,12 +43,13 @@ export default function Results() {
 
         {/* Category Breakdown */}
         <div className="animate-fade-in" style={{ animationDelay: "0.1s" }}>
-          <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-4">Category Scores</p>
+          <p className="text-xs font-semibold tracking-widest uppercase text-accent mb-4">Category Scores</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {CATEGORIES.map((cat) => {
               const score = categoryScores[cat] || 0;
               return (
-                <div key={cat} className="border border-border rounded p-5 text-center">
+                <div key={cat} className="relative overflow-hidden border border-border rounded-lg bg-card p-5 text-center shadow-card">
+                  <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-cta" />
                   <p className="text-2xl font-display font-semibold text-foreground">{score.toFixed(1)}</p>
                   <p className="text-xs text-muted-foreground mt-1.5 tracking-wide">{cat}</p>
                 </div>
@@ -59,14 +61,14 @@ export default function Results() {
         {/* Top 3 Priorities */}
         <div className="space-y-5 animate-fade-in" style={{ animationDelay: "0.15s" }}>
           <div>
-            <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-1">Recommendations</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-accent mb-1">Recommendations</p>
             <h2 className="text-display-sm text-foreground">Your Top 3 Priorities</h2>
           </div>
           <div className="space-y-3">
             {recommendations.map((rec, i) => (
-              <div key={i} className="border border-border rounded p-6 space-y-2">
+              <div key={i} className="border border-border rounded-lg bg-card p-6 space-y-2 shadow-card">
                 <div className="flex items-start gap-4">
-                  <span className="text-accent font-semibold text-sm mt-0.5 shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-cta text-xs font-semibold text-accent-foreground mt-0.5">{String(i + 1).padStart(2, "0")}</span>
                   <div>
                     <h3 className="font-semibold text-foreground">{rec.title}</h3>
                     <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{rec.description}</p>
@@ -81,12 +83,12 @@ export default function Results() {
         {/* 90-Day Timeline */}
         <div className="space-y-5 animate-fade-in" style={{ animationDelay: "0.2s" }}>
           <div>
-            <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-1">Implementation</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-accent mb-1">Implementation</p>
             <h2 className="text-display-sm text-foreground">90-Day Action Plan</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {QUICKSTART_TIMELINE.map((phase) => (
-              <div key={phase.phase} className="border border-border rounded p-6 space-y-4">
+              <div key={phase.phase} className="relative overflow-hidden border border-border rounded-lg bg-card p-6 space-y-4 shadow-card">
                 <div>
                   <span className="text-xs font-semibold text-accent uppercase tracking-widest">{phase.phase}</span>
                   <h3 className="font-semibold text-foreground mt-1">{phase.title}</h3>
@@ -116,7 +118,7 @@ export default function Results() {
         </div>
 
         {/* Contact CTA */}
-        <div className="bg-primary text-primary-foreground rounded p-10 md:p-14 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+        <div className="bg-gradient-deep text-primary-foreground rounded-lg p-10 md:p-14 shadow-brand animate-fade-in" style={{ animationDelay: "0.3s" }}>
           <div className="flex flex-col md:flex-row items-center gap-10">
             <div className="flex-1 space-y-4 text-center md:text-left">
               <p className="text-xs font-semibold tracking-widest uppercase text-primary-foreground/60">
@@ -135,8 +137,7 @@ export default function Results() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-2">
                 <Button
-                  variant="hero-outline"
-                  className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                  variant="hero-yellow"
                   asChild
                 >
                   <Link to="/thanks">
@@ -171,7 +172,7 @@ export default function Results() {
         </div>
       </div>
 
-      <footer className="border-t border-border py-10">
+      <footer className="border-t-2 border-accent/30 py-10">
         <div className="container text-center text-xs text-muted-foreground tracking-wide">
           © {new Date().getFullYear()} T3 Sixty. All rights reserved.
         </div>

@@ -254,7 +254,7 @@ export default function Admin() {
 
   if (!sessionChecked) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-gradient-soft">
         <Header />
         <div className="container py-24 text-center text-muted-foreground">Loading…</div>
       </div>
@@ -263,7 +263,7 @@ export default function Admin() {
 
   if (!authed) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-gradient-soft">
         <Header />
         <div className="container max-w-sm py-24">
           <div className="border border-border rounded p-8 space-y-6">
@@ -307,7 +307,7 @@ export default function Admin() {
 
   if (!isAdmin) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-gradient-soft">
         <Header />
         <div className="container max-w-sm py-24 text-center space-y-4">
           <h1 className="text-display-sm text-foreground">Access Denied</h1>
@@ -321,7 +321,7 @@ export default function Admin() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-soft">
       <Header />
       <div className="container py-10">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">

@@ -126,16 +126,16 @@ export default function Scorecard() {
 
   return (
     <TooltipProvider delayDuration={300}>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-gradient-soft">
         <Header />
         <div className="container max-w-2xl py-12 md:py-20">
           {/* Progress */}
           <div className="mb-10 space-y-3">
-            <div className="flex items-center justify-between text-xs text-muted-foreground uppercase tracking-wide">
-              <span>AI Maturity Assessment</span>
-              <span>{answeredCount} of {QUESTIONS.length} complete</span>
+            <div className="flex items-center justify-between text-xs uppercase tracking-wide">
+              <span className="font-semibold text-accent">AI Maturity Assessment</span>
+              <span className="text-muted-foreground">{answeredCount} of {QUESTIONS.length} complete</span>
             </div>
-            <Progress value={progress} className="h-1.5" />
+            <Progress value={progress} className="h-1.5 [&>div]:bg-gradient-cta" />
           </div>
 
           {/* Category Tabs */}
@@ -146,11 +146,11 @@ export default function Scorecard() {
                 onClick={() => {
                   if (i <= currentCategory) setCurrentCategory(i);
                 }}
-                className={`text-xs font-medium px-4 py-2 rounded transition-colors tracking-wide uppercase ${
+                className={`text-xs font-medium px-4 py-2 rounded-full transition-colors tracking-wide uppercase ${
                   i === currentCategory
-                    ? "bg-primary text-primary-foreground"
+                    ? "bg-gradient-cta text-accent-foreground shadow-brand"
                     : i < currentCategory
-                    ? "bg-muted text-foreground cursor-pointer hover:bg-muted/80"
+                    ? "bg-brand-light/15 text-foreground cursor-pointer hover:bg-brand-light/25"
                     : "text-muted-foreground cursor-default"
                 }`}
               >
@@ -161,7 +161,7 @@ export default function Scorecard() {
 
           {/* Section Label */}
           <div className="mb-8">
-            <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-1">
+            <p className="text-xs font-semibold tracking-widest uppercase text-accent mb-1">
               Section {currentCategory + 1} of {CATEGORIES.length}
             </p>
             <h2 className="text-display-sm text-foreground">{CATEGORIES[currentCategory]}</h2>
@@ -208,8 +208,8 @@ export default function Scorecard() {
                       onClick={() => handleAnswer(q.id, v)}
                       className={`flex-1 h-11 rounded border text-sm font-medium transition-all ${
                         answers[q.id] === v
-                          ? "bg-primary text-primary-foreground border-primary"
-                          : "bg-background text-foreground border-border hover:bg-muted"
+                          ? "bg-gradient-cta text-accent-foreground border-transparent shadow-brand"
+                          : "bg-card text-foreground border-border hover:border-accent/40 hover:bg-brand-light/10"
                       }`}
                       aria-label={`Rate ${v} out of 5`}
                     >
