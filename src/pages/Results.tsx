@@ -61,14 +61,14 @@ export default function Results() {
         {/* Top 3 Priorities */}
         <div className="space-y-5 animate-fade-in" style={{ animationDelay: "0.15s" }}>
           <div>
-            <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-1">Recommendations</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-accent mb-1">Recommendations</p>
             <h2 className="text-display-sm text-foreground">Your Top 3 Priorities</h2>
           </div>
           <div className="space-y-3">
             {recommendations.map((rec, i) => (
-              <div key={i} className="border border-border rounded p-6 space-y-2">
+              <div key={i} className="border border-border rounded-lg bg-card p-6 space-y-2 shadow-card">
                 <div className="flex items-start gap-4">
-                  <span className="text-accent font-semibold text-sm mt-0.5 shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-cta text-xs font-semibold text-accent-foreground mt-0.5">{String(i + 1).padStart(2, "0")}</span>
                   <div>
                     <h3 className="font-semibold text-foreground">{rec.title}</h3>
                     <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{rec.description}</p>
@@ -83,12 +83,12 @@ export default function Results() {
         {/* 90-Day Timeline */}
         <div className="space-y-5 animate-fade-in" style={{ animationDelay: "0.2s" }}>
           <div>
-            <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-1">Implementation</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-accent mb-1">Implementation</p>
             <h2 className="text-display-sm text-foreground">90-Day Action Plan</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {QUICKSTART_TIMELINE.map((phase) => (
-              <div key={phase.phase} className="border border-border rounded p-6 space-y-4">
+              <div key={phase.phase} className="relative overflow-hidden border border-border rounded-lg bg-card p-6 space-y-4 shadow-card">
                 <div>
                   <span className="text-xs font-semibold text-accent uppercase tracking-widest">{phase.phase}</span>
                   <h3 className="font-semibold text-foreground mt-1">{phase.title}</h3>
@@ -118,7 +118,7 @@ export default function Results() {
         </div>
 
         {/* Contact CTA */}
-        <div className="bg-primary text-primary-foreground rounded p-10 md:p-14 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+        <div className="bg-gradient-deep text-primary-foreground rounded-lg p-10 md:p-14 shadow-brand animate-fade-in" style={{ animationDelay: "0.3s" }}>
           <div className="flex flex-col md:flex-row items-center gap-10">
             <div className="flex-1 space-y-4 text-center md:text-left">
               <p className="text-xs font-semibold tracking-widest uppercase text-primary-foreground/60">
