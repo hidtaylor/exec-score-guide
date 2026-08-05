@@ -21,18 +21,19 @@ export default function Results() {
     totalScore >= 30 ? "text-score-mid" : "text-score-low";
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-soft">
       <Header />
       <div className="container max-w-3xl py-12 md:py-20 space-y-16">
         {/* Score Overview */}
         <div className="text-center space-y-5 animate-fade-in">
-          <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
+          <p className="inline-flex items-center gap-2 rounded-full border border-warning/40 bg-warning/15 px-3 py-1 text-xs font-semibold tracking-widest uppercase text-primary">
+            <span className="h-1.5 w-1.5 rounded-full bg-warning" />
             AI Maturity Assessment Results
           </p>
           <div className={`text-6xl md:text-7xl font-display font-semibold ${scoreColor}`}>
             {totalScore}<span className="text-xl text-muted-foreground font-sans font-normal">/60</span>
           </div>
-          <div className="inline-block border border-border px-4 py-1.5 rounded text-xs font-semibold uppercase tracking-wide text-foreground">
+          <div className="inline-block border border-accent/30 bg-accent/10 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide text-accent">
             {band}
           </div>
           <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed text-sm">
@@ -42,12 +43,13 @@ export default function Results() {
 
         {/* Category Breakdown */}
         <div className="animate-fade-in" style={{ animationDelay: "0.1s" }}>
-          <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-4">Category Scores</p>
+          <p className="text-xs font-semibold tracking-widest uppercase text-accent mb-4">Category Scores</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {CATEGORIES.map((cat) => {
               const score = categoryScores[cat] || 0;
               return (
-                <div key={cat} className="border border-border rounded p-5 text-center">
+                <div key={cat} className="relative overflow-hidden border border-border rounded-lg bg-card p-5 text-center shadow-card">
+                  <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-cta" />
                   <p className="text-2xl font-display font-semibold text-foreground">{score.toFixed(1)}</p>
                   <p className="text-xs text-muted-foreground mt-1.5 tracking-wide">{cat}</p>
                 </div>
