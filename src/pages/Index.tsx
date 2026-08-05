@@ -12,6 +12,22 @@ const DELIVERS = [
 "Baseline KPI targets to track return on AI investment"];
 
 
+const HOME_JSON_LD = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "T3 Sixty",
+    url: "https://readiness.t360.com",
+    logo: "https://readiness.t360.com/favicon.png",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "T3 Anchor",
+    url: "https://readiness.t360.com",
+  },
+];
+
 export default function Index() {
   return (
     <div className="min-h-screen bg-background">
@@ -19,21 +35,7 @@ export default function Index() {
         title="T3 Anchor — Brokerage AI Readiness Assessment"
         description="Free 10 minute T3 Anchor assessment scoring your brokerage's AI readiness across four dimensions, with a phased 90-day roadmap."
         path="/"
-        jsonLd={[
-          {
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "T3 Sixty",
-            url: "https://readiness.t360.com",
-            logo: "https://readiness.t360.com/favicon.png",
-          },
-          {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            name: "T3 Anchor",
-            url: "https://readiness.t360.com",
-          },
-        ]}
+        jsonLd={HOME_JSON_LD}
       />
       <Header />
 
