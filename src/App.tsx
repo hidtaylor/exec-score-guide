@@ -9,6 +9,8 @@ import Scorecard from "./pages/Scorecard";
 import Results from "./pages/Results";
 import Thanks from "./pages/Thanks";
 import Admin from "./pages/Admin";
+import Login from "./pages/Login";
+import OAuthConsent from "./pages/OAuthConsent";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +28,8 @@ const App = () => (
             <Route path="/results" element={<Results />} />
             <Route path="/thanks" element={<Thanks />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

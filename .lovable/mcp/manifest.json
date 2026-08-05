@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.1",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://znrahrqrariflnxfwhvh.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "ai-brokerage-accelerator",
+      "version": "0.1.0",
+      "title": "AI Brokerage Accelerator"
+    },
+    "tools": [
+      {
+        "name": "list_leads",
+        "title": "List leads",
+        "description": "List brokerage leads who submitted the AI readiness scorecard, newest first, with their assessment score and band.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "description": "Max leads to return (default 20)."
+            },
+            "band": {
+              "type": "string",
+              "description": "Filter by readiness band, e.g. 'Emerging'."
+            },
+            "search": {
+              "type": "string",
+              "description": "Case-insensitive match on email or brokerage name."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_lead_assessment",
+        "title": "Get lead assessment",
+        "description": "Get one lead's full AI readiness assessment: contact details, per-question answers, category scores, band and recommendations.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "lead_id": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The lead's UUID, as returned by list_leads."
+            }
+          },
+          "required": [
+            "lead_id"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "assessment_summary",
+        "title": "Assessment summary",
+        "description": "Aggregate statistics across all AI readiness assessments: total count, average score, band distribution and average score per category.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
