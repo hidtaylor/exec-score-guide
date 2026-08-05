@@ -49,7 +49,7 @@ export default function Index() {
                 />
                 <div>
                   <blockquote className="text-foreground leading-relaxed">
-                    “The T3 ANCHOR program helps a brokerage decide what stays with people and what an AI agent runs under supervision.”
+                    “The T3 Sixty Brokerage AI Strategy and Roadmap&nbsp; program helps a brokerage decide what stays with people and what an AI agent runs under supervision.”
                   </blockquote>
                   <figcaption className="mt-3 text-xs tracking-widest uppercase text-muted-foreground">
                     Derek Taylor — SVP T3 Technology Consulting
