@@ -22,7 +22,7 @@ export default function Index() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             <div className="space-y-6 animate-fade-in max-w-lg">
               <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
-                T3 ANCHOR — AI Navigation, Compliance, Human Oversight, Roadmap
+                {"\n"}
               </p>
 
               <h1 className="text-display-lg text-foreground">
