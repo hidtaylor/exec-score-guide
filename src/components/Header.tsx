@@ -7,7 +7,7 @@ export default function Header() {
       <div className="container flex h-14 items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5 text-foreground">
           <T3SixtyLogo className="h-8 w-8" />
-          <span className="text-[10px] sm:text-sm font-semibold tracking-wide uppercase whitespace-nowrap">Brokerage AI Strategy and Roadmap Engagement</span>
+          <span className="text-[10px] sm:text-sm font-semibold tracking-wide uppercase whitespace-nowrap">T3 ANCHOR - AI NAVIGATION, COMPLIANCE, HUMAN OVERSIGHT, ROADMAP</span>
         </Link>
         <nav className="hidden sm:flex items-center gap-8 text-sm text-muted-foreground">
           <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
