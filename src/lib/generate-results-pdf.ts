@@ -48,7 +48,7 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
     setColor(doc, 113, 142, 177);
-    doc.text("AI Readiness Assessment Results", margin + logoW + 10, y);
+    doc.text("T3 Anchor Results", margin + logoW + 10, y);
     y += 50;
   } catch {
     doc.setFont("helvetica", "bold");
@@ -58,7 +58,7 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
     setColor(doc, 113, 142, 177);
-    doc.text("AI Readiness Assessment Results", margin, y + 18);
+    doc.text("T3 Anchor Results", margin, y + 18);
     y += 50;
   }
 
@@ -212,7 +212,7 @@ export async function generateResultsPDF(assessment: AssessmentResult, lead: Lea
   setColor(doc, 113, 142, 177);
   doc.text("Derek Taylor", textX, y);
   y += 12;
-  doc.text("VP of Technology Consulting and AI Transformation", textX, y);
+  doc.text("SVP T3 Technology Consulting", textX, y);
   y += 12;
   doc.text("T3 Sixty", textX, y);
   y += 16;
