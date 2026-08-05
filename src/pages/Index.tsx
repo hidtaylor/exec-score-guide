@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import LeadCaptureForm from "@/components/LeadCaptureForm";
+import derekPhoto from "@/assets/derek-taylor.jpg.asset.json";
 
 const DELIVERS = [
 "A structured AI maturity assessment across four operational dimensions",
@@ -20,14 +21,15 @@ export default function Index() {
         <div className="container py-20 md:py-28">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             <div className="space-y-6 animate-fade-in max-w-lg">
-              
+              <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
+                T3 ANCHOR — AI Navigation, Compliance, Human Oversight, Roadmap
+              </p>
 
-              
               <h1 className="text-display-lg text-foreground">
                 Assess Your Brokerage's AI Readiness
               </h1>
               <p className="text-base text-muted-foreground leading-relaxed">
-                Identify gaps, prioritize initiatives and build a 90-day action plan — in under 15 minutes.
+                Identify gaps, prioritize initiatives and build a 90-day action plan — in under 10 minutes.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 pt-4">
                 <Button variant="hero" asChild>
@@ -37,7 +39,25 @@ export default function Index() {
                   <Link to="/thanks">Schedule a Consultation</Link>
                 </Button>
               </div>
+
+              <figure className="flex flex-col sm:flex-row gap-5 items-start pt-8 mt-8 border-t border-border">
+                <img
+                  src={derekPhoto.url}
+                  alt="Derek Taylor, SVP T3 Technology Consulting"
+                  loading="lazy"
+                  className="h-20 w-20 rounded object-cover shrink-0"
+                />
+                <div>
+                  <blockquote className="text-foreground leading-relaxed">
+                    “The T3 ANCHOR program helps a brokerage decide what stays with people and what an AI agent runs under supervision.”
+                  </blockquote>
+                  <figcaption className="mt-3 text-xs tracking-widest uppercase text-muted-foreground">
+                    Derek Taylor — SVP T3 Technology Consulting
+                  </figcaption>
+                </div>
+              </figure>
             </div>
+
 
             {/* Lead Form */}
             <div id="get-started" className="border border-border rounded bg-card p-8 md:p-10 animate-fade-in" style={{ animationDelay: "0.1s" }}>
