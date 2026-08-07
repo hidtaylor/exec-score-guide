@@ -10,7 +10,7 @@ export default function Header() {
           <span className="text-[10px] sm:text-sm font-semibold tracking-wide uppercase whitespace-nowrap">T3 ANCHOR - AI NAVIGATION, COMPLIANCE, HUMAN OVERSIGHT, ROADMAP</span>
         </Link>
         <nav className="hidden sm:flex items-center gap-8 text-sm text-muted-foreground">
-          <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
+          <a href="https://t3sixty.com" className="hover:text-foreground transition-colors">Home</a>
         </nav>
       </div>
     </header>
